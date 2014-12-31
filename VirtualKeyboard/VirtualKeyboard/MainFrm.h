@@ -1,8 +1,9 @@
-
-// MainFrm.h : CMainFrame 类的接口
+// MainFrm.h : interface of the CMainFrame class
 //
 
+
 #pragma once
+
 #include "ChildView.h"
 
 class CMainFrame : public CFrameWnd
@@ -13,18 +14,18 @@ public:
 protected: 
 	DECLARE_DYNAMIC(CMainFrame)
 
-// 特性
+// Attributes
 public:
 
-// 操作
+// Operations
 public:
 
-// 重写
+// Overrides
 public:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
 
-// 实现
+// Implementation
 public:
 	virtual ~CMainFrame();
 #ifdef _DEBUG
@@ -32,17 +33,19 @@ public:
 	virtual void Dump(CDumpContext& dc) const;
 #endif
 
-protected:  // 控件条嵌入成员
-	CToolBar          m_wndToolBar;
-	CStatusBar        m_wndStatusBar;
+private:
 	CChildView    m_wndView;
+    Keyboard      m_kb;
+    HWND          m_hForground;
 
-// 生成的消息映射函数
+// Generated message map functions
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnSetFocus(CWnd *pOldWnd);
 	DECLARE_MESSAGE_MAP()
-
+public:
+    afx_msg void OnNcLButtonDown(UINT nHitTest, CPoint point);
+    afx_msg void OnNcMouseMove(UINT nHitTest, CPoint point);
 };
 
 

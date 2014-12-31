@@ -1,36 +1,42 @@
-
-// ChildView.h : CChildView 类的接口
+// ChildView.h : interface of the CChildView class
 //
 
 
 #pragma once
 
+#include "Keyboard.h"
 
-// CChildView 窗口
+// CChildView window
 
 class CChildView : public CWnd
 {
-// 构造
+// Construction
 public:
 	CChildView();
+    bool Bind(Keyboard* pkb);
 
-// 特性
+// Attributes
+private:
+    Keyboard* m_pkb;
+
+// Operations
 public:
 
-// 操作
-public:
-
-// 重写
+// Overrides
 	protected:
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
-// 实现
+// Implementation
 public:
 	virtual ~CChildView();
 
-	// 生成的消息映射函数
+	// Generated message map functions
 protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
+public:
+    afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+    afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+    afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 };
 

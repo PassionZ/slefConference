@@ -1,31 +1,29 @@
-
-// VirtualKeyboard.h : VirtualKeyboard 应用程序的主头文件
+// VirtualKeyboard.h : main header file for the VirtualKeyboard application
 //
 #pragma once
 
 #ifndef __AFXWIN_H__
-	#error "在包含此文件之前包含“stdafx.h”以生成 PCH 文件"
+	#error "include 'stdafx.h' before including this file for PCH"
 #endif
 
-#include "resource.h"       // 主符号
+#include "resource.h"       // main symbols
 
 
 // CVirtualKeyboardApp:
-// 有关此类的实现，请参阅 VirtualKeyboard.cpp
+// See VirtualKeyboard.cpp for the implementation of this class
 //
 
-class CVirtualKeyboardApp : public CWinAppEx
+class CVirtualKeyboardApp : public CWinApp
 {
 public:
 	CVirtualKeyboardApp();
 
 
-// 重写
+// Overrides
 public:
 	virtual BOOL InitInstance();
-	virtual int ExitInstance();
 
-// 实现
+// Implementation
 
 public:
 	afx_msg void OnAppAbout();

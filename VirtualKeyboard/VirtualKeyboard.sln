@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VirtualKeyboard", "VirtualKeyboard\VirtualKeyboard.vcxproj", "{72E6B3D2-0664-4ED5-BC28-DA2B65EDA395}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VirtualKeyboard", "VirtualKeyboard\VirtualKeyboard.vcxproj", "{D0F4CB1E-09D7-4C29-A0B4-3B972FB10B1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{72E6B3D2-0664-4ED5-BC28-DA2B65EDA395}.Debug|Win32.ActiveCfg = Debug|Win32
-		{72E6B3D2-0664-4ED5-BC28-DA2B65EDA395}.Debug|Win32.Build.0 = Debug|Win32
-		{72E6B3D2-0664-4ED5-BC28-DA2B65EDA395}.Release|Win32.ActiveCfg = Release|Win32
-		{72E6B3D2-0664-4ED5-BC28-DA2B65EDA395}.Release|Win32.Build.0 = Release|Win32
+		{D0F4CB1E-09D7-4C29-A0B4-3B972FB10B1A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D0F4CB1E-09D7-4C29-A0B4-3B972FB10B1A}.Debug|Win32.Build.0 = Debug|Win32
+		{D0F4CB1E-09D7-4C29-A0B4-3B972FB10B1A}.Release|Win32.ActiveCfg = Release|Win32
+		{D0F4CB1E-09D7-4C29-A0B4-3B972FB10B1A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

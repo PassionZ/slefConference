@@ -1,5 +1,4 @@
-
-// MainFrm.cpp : CMainFrame 类的实现
+// MainFrm.cpp : implementation of the CMainFrame class
 //
 
 #include "stdafx.h"
@@ -15,28 +14,19 @@
 
 IMPLEMENT_DYNAMIC(CMainFrame, CFrameWnd)
 
-const int  iMaxUserToolbars = 10;
-const UINT uiFirstUserToolBarId = AFX_IDW_CONTROLBAR_FIRST + 40;
-const UINT uiLastUserToolBarId = uiFirstUserToolBarId + iMaxUserToolbars - 1;
-
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
 	ON_WM_SETFOCUS()
+    ON_WM_NCLBUTTONDOWN()
+    ON_WM_NCMOUSEMOVE()
 END_MESSAGE_MAP()
 
-static UINT indicators[] =
-{
-	ID_SEPARATOR,           // 状态行指示器
-	ID_INDICATOR_CAPS,
-	ID_INDICATOR_NUM,
-	ID_INDICATOR_SCRL,
-};
-
-// CMainFrame 构造/析构
+// CMainFrame construction/destruction
 
 CMainFrame::CMainFrame()
 {
-	// TODO: 在此添加成员初始化代码
+    m_wndView.Bind(&m_kb);
+    m_hForground = NULL;
 }
 
 CMainFrame::~CMainFrame()
@@ -48,33 +38,13 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	// 创建一个视图以占用框架的工作区
-	if (!m_wndView.Create(NULL, NULL, AFX_WS_DEFAULT_VIEW, CRect(0, 0, 0, 0), this, AFX_IDW_PANE_FIRST, NULL))
+	// create a view to occupy the client area of the frame
+	if (!m_wndView.Create(NULL, NULL, AFX_WS_DEFAULT_VIEW,
+		CRect(0, 0, 0, 0), this, AFX_IDW_PANE_FIRST, NULL))
 	{
-		TRACE0("未能创建视图窗口\n");
+		TRACE0("Failed to create view window\n");
 		return -1;
 	}
-
-	if (!m_wndToolBar.CreateEx(this, TBSTYLE_FLAT, WS_CHILD | WS_VISIBLE | CBRS_TOP | CBRS_GRIPPER | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC) ||
-		!m_wndToolBar.LoadToolBar(IDR_MAINFRAME))
-	{
-		TRACE0("未能创建工具栏\n");
-		return -1;      // 未能创建
-	}
-
-	if (!m_wndStatusBar.Create(this))
-	{
-		TRACE0("未能创建状态栏\n");
-		return -1;      // 未能创建
-	}
-	m_wndStatusBar.SetIndicators(indicators, sizeof(indicators)/sizeof(UINT));
-
-	// TODO: 如果不需要可停靠工具栏，则删除这三行
-	m_wndToolBar.EnableDocking(CBRS_ALIGN_ANY);
-	EnableDocking(CBRS_ALIGN_ANY);
-	DockControlBar(&m_wndToolBar);
-
-
 	return 0;
 }
 
@@ -82,15 +52,25 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
 	if( !CFrameWnd::PreCreateWindow(cs) )
 		return FALSE;
-	// TODO: 在此处通过修改
-	//  CREATESTRUCT cs 来修改窗口类或样式
+	// TODO: Modify the Window class or styles here by modifying
+	//  the CREATESTRUCT cs
+
+    CSize sz = m_kb.getSize();
+    cs.cx = sz.cx + ( GetSystemMetrics(SM_CXEDGE) + GetSystemMetrics(SM_CXSIZEFRAME) ) * 2;
+    cs.cy = sz.cy +   GetSystemMetrics(SM_CYMENU) + GetSystemMetrics(SM_CYCAPTION)
+                  + ( GetSystemMetrics(SM_CYEDGE) + GetSystemMetrics(SM_CXSIZEFRAME) ) * 2;
+
+	cs.style = WS_OVERLAPPED | WS_CAPTION | FWS_ADDTOTITLE
+		  | WS_MINIMIZEBOX | WS_SYSMENU;
 
 	cs.dwExStyle &= ~WS_EX_CLIENTEDGE;
+    cs.dwExStyle |= WS_EX_TOPMOST | WS_EX_NOACTIVATE | WS_EX_APPWINDOW ;
 	cs.lpszClass = AfxRegisterWndClass(0);
 	return TRUE;
 }
 
-// CMainFrame 诊断
+
+// CMainFrame diagnostics
 
 #ifdef _DEBUG
 void CMainFrame::AssertValid() const
@@ -102,24 +82,47 @@ void CMainFrame::Dump(CDumpContext& dc) const
 {
 	CFrameWnd::Dump(dc);
 }
+
 #endif //_DEBUG
 
-
-// CMainFrame 消息处理程序
+// CMainFrame message handlers
 
 void CMainFrame::OnSetFocus(CWnd* /*pOldWnd*/)
 {
-	// 将焦点前移到视图窗口
+	// forward focus to the view window
 	m_wndView.SetFocus();
 }
 
 BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
 {
-	// 让视图第一次尝试该命令
+	// let the view have first crack at the command
 	if (m_wndView.OnCmdMsg(nID, nCode, pExtra, pHandlerInfo))
 		return TRUE;
 
-	// 否则，执行默认处理
+	// otherwise, do default handling
 	return CFrameWnd::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
 
+void CMainFrame::OnNcLButtonDown(UINT nHitTest, CPoint point)
+{
+    // TODO: Add your message handler code here and/or call default
+    if(m_hForground == NULL)
+    {
+        m_hForground = ::GetForegroundWindow();
+        ModifyStyleEx(WS_EX_NOACTIVATE,0);
+        SetForegroundWindow();
+    }
+    CFrameWnd::OnNcLButtonDown(nHitTest, point);
+}
+
+void CMainFrame::OnNcMouseMove(UINT nHitTest, CPoint point)
+{
+    // TODO: Add your message handler code here and/or call default
+    if(m_hForground != NULL)
+    {
+        ::SetForegroundWindow(m_hForground);
+        ModifyStyleEx(0,WS_EX_NOACTIVATE);
+        m_hForground = NULL;
+    }
+    CFrameWnd::OnNcMouseMove(nHitTest, point);
+}
