@@ -1,0 +1,3 @@
+copy file to web/UpLoadFloder
+run web/run/upload.sh
+get result
