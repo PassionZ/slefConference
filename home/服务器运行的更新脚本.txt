@@ -1,0 +1,20 @@
+/home/run
+
+PC-HOST
+为IP地址
+
+cd /home/uploads/
+上传目录中的内容
+cd /home/web/
+更新数据的目录
+
+
+
+ sh downloadRun.sh 
+下载运行脚本
+ sh gitpull.sh 
+执行更新数据脚本
+
+
+更新后自动执行copy.sh
+拷贝文件到指定目录
