@@ -1,7 +1,7 @@
 #!/bin/bash
-HOST="192.168.0.128"
+HOST=`cat /home/PCNOW-HOST`
 USER="root"
-PASS="54007"
+PASS="123456"
 
 LCD="/home/web/"
 #mkdir $LCD

@@ -1,11 +1,11 @@
 #!/bin/bash
-HOST="192.168.0.128"
+HOST="192.168.0.106"
 USER="root"
-PASS="54007"
+PASS="29074858"
 
-LCD="/home/run/"
+LCD="/home/web/"
 #mkdir $LCD
-RCD="/var/ftp/run"
+RCD="/var/ftp/web"
 lftp -c "set ftp:list-options -a;
 open ftp://$USER:$PASS@$HOST;
 lcd $LCD;

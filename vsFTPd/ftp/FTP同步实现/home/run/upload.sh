@@ -1,18 +1,19 @@
 #!/bin/bash
-HOST="192.168.0.128"
+HOST="192.168.0.106"
 USER="root"
-PASS="54007"
+PASS="29074858"
+#LCD="/home/dir/web/UpLoadFloder"
 
-LCD="/home/run/"
-#mkdir $LCD
-RCD="/var/ftp/run"
+LCD="/home/uploads/"
+RCD="/var/ftp/uploads/"
 lftp -c "set ftp:list-options -a;
 open ftp://$USER:$PASS@$HOST;
 lcd $LCD;
 cd $RCD;
-mirror --delete \
-       --verbose \
-       --exclude-glob a-dir-to-exclude/ \
+mirror --reverse \
+       --only-newer  \
+          --verbose \
+        --exclude-glob a-dir-to-exclude/ \
        --exclude-glob a-file-to-exclude \
        --exclude-glob a-file-group-to-exclude* \
        --exclude-glob other-files-to-esclude"

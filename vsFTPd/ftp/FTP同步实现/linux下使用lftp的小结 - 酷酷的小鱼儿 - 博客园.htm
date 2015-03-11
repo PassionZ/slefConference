@@ -1,0 +1,596 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML lang=zh-cn xmlns="http://www.w3.org/1999/xhtml"><HEAD><META 
+content="IE=8.0000" http-equiv="X-UA-Compatible">
+
+<SCRIPT src="//www.google-analytics.com/analytics.js" async="1"></SCRIPT>
+<TITLE>linux下使用lftp的小结 - 酷酷的小鱼儿 - 博客园</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css 
+href="/bundles/blog-common.css?v=RFWbSMVn474Meo5c6rKa1DH_M4ldFPuI9Jah-EA-L5Q1"><LINK 
+id=MainCss rel=stylesheet type=text/css 
+href="/skins/coffee/bundle-coffee.css?v=H7P3zU3_M529NtLVh9kKULJaZLDGv9Qz_L_VdgyN1P41"><LINK 
+title=RSS rel=alternate type=application/rss+xml 
+href="http://www.cnblogs.com/LJ-fish/rss"><LINK title=RSD rel=EditURI 
+type=application/rsd+xml href="http://www.cnblogs.com/LJ-fish/rsd.xml"><LINK 
+rel=wlwmanifest type=application/wlwmanifest+xml 
+href="http://www.cnblogs.com/LJ-fish/wlwmanifest.xml">
+<SCRIPT type=text/javascript 
+src="http://www.googletagservices.com/tag/js/gpt.js" async="true"></SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="http://common.cnblogs.com/script/jquery.js"></SCRIPT>
+
+<SCRIPT type=text/javascript>var currentBlogApp = 'LJ-fish', cb_enable_mathjax=false;</SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="/bundles/blog-common.js?v=NRIlPIHMlVEgoqJZIuk9OQtjtZjNFcz_ov8kYhFFdoM1"></SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="http://partner.googleadservices.com/gpt/pubads_impl_57.js" 
+async="true"></SCRIPT>
+
+<SCRIPT 
+src="//pagead2.googlesyndication.com/pagead/expansion_embed.js?source=safeframe"></SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="http://pagead2.googlesyndication.com/pagead/osd.js"></SCRIPT>
+</HEAD>
+<BODY windowc_onresizez="true"><A name=top></A><!--done-->
+<DIV id=home>
+<DIV id=header>
+<DIV id=blogTitle><A id=lnkBlogLogo href="http://www.cnblogs.com/LJ-fish/"><IMG 
+id=blogLogo alt=返回主页 src="/Skins/custom/images/logo.gif"></A> <!--done-->
+<H1><A id=Header1_HeaderTitle class=headermaintitle 
+href="http://www.cnblogs.com/LJ-fish/">昆明鱼</A></H1>
+<H2>我不希望在未来某个日子见到我的意中人的时候身体不够强壮、英语不够好、喂养小猫的知识不够渊博、收入不够高或者穿着土里土气，所以我每一天都在努力成为更好的人。</H2></DIV><!--end: blogTitle 博客的标题和副标题 --></DIV><!--end: header 头部 -->
+<DIV id=main>
+<DIV id=mainContent>
+<DIV class=forFlow>
+<DIV id=navigator><!--done-->
+<UL id=navList>
+  <LI><A id=MyLinks1_HomeLink class=menu 
+  href="http://www.cnblogs.com/">博客园</A></LI>
+  <LI><A id=MyLinks1_IngLink class=menu 
+  href="http://home.cnblogs.com/ing/">闪存</A></LI>
+  <LI><A id=MyLinks1_MyHomeLink class=menu 
+  href="http://www.cnblogs.com/LJ-fish/">首页</A></LI>
+  <LI><A id=MyLinks1_NewPostLink class=menu 
+  href="http://i.cnblogs.com/EditPosts.aspx?opt=1" rel=nofollow>新随笔</A></LI>
+  <LI><A accessKey=9 id=MyLinks1_ContactLink class=menu 
+  href="http://space.cnblogs.com/msg/send/%e9%85%b7%e9%85%b7%e7%9a%84%e5%b0%8f%e9%b1%bc%e5%84%bf" 
+  rel=nofollow>联系</A></LI>
+  <LI><A id=MyLinks1_Admin class=menu href="http://i.cnblogs.com/" 
+  rel=nofollow>管理</A></LI>
+  <LI><A id=MyLinks1_Syndication class=menu 
+  href="http://www.cnblogs.com/LJ-fish/rss">订阅</A> <A id=MyLinks1_XMLLink 
+  class=aHeaderXML href="http://www.cnblogs.com/LJ-fish/rss"><IMG alt=订阅 
+  src="http://www.cnblogs.com/images/xml.gif"></A></LI></UL>
+<DIV class=blogStats><!--done-->随笔- 17&nbsp; 文章- 0&nbsp; 评论- 11&nbsp; </DIV><!--end: blogStats --></DIV><!--end: navigator 博客导航栏 --><!--done-->
+<DIV id=topics>
+<DIV class=post>
+<H1 class=postTitle><A id=cb_post_title_url class=postTitle2 
+href="http://www.cnblogs.com/LJ-fish/archive/2010/03/15/1686607.html">linux下使用lftp的小结</A> 
+</H1>
+<DIV class=clear></DIV>
+<DIV class=postBody>
+<DIV id=cnblogs_post_body>
+<P>今天在解决一个远程服务器备份的问题时，用到了lftp的相关知识。整理如下：</P>
+<P>lftp的功能比较强大，相比原来用ftp，方便了很多。</P>
+<P>1、登陆：</P>
+<P>lftp <A href="ftp://yourname@site">ftp://yourname@site</A></P>
+<P>pwd:*****</P>
+<P>或 open <A href="ftp://yourname@site">ftp://yourname@site</A></P>
+<P>&nbsp;</P>
+<P>2、基本操作（转）</P>
+<H5><A href="http://lizziesky.blogspot.com/2007/11/lftp.html">lftp使用介绍</A></H5>
+<P>lftp 是一个功能强大的下载工具，它支持访问文件的协议: ftp, ftps, http, https, hftp, 
+fish.(其中ftps和https需要在编译的时候包含openssl库)。llftp的界面非常想一个shell: 
+有命令补全，历史记录，允许多个后台任务执行等功能，使用起来非常方便。它还有书签、排队、镜像、断点续传、多进程下载等功能。<BR>命令行语法<BR>要看lftp的命令行语法，只要在shell中输入lftp 
+--help<BR>lftp [OPTS]<BR>'lftp'是在 rc 文件执行后 lftp 执行的第一个命令<BR>-f 执行文件中的命令后退出<BR>-c 
+执行命令后退出<BR>--help 显示帮助信息后退出<BR>--version 显示 lftp 版本后退出<BR>其他的选项同 'open' 命令<BR>-e 
+在选择后执行命令<BR>-u [,] 使用指定的用户名/口令进行验证<BR>-p 连接指定的端口<BR>主机名, URL 
+或书签的名字<BR>如果在命令行中输入的站点名称，lftp将直接登录站点，比如<BR>$lftp 
+ftp://.............<BR>如果在命令行不输入站点名称，则必须在进入到lftp界面后用open命令打开<BR>[yhj@ccse-yhj 
+yhj]$ lftp<BR>lftp :~&gt; open ftp://...................<BR>常用命令<BR>* 
+下载单个文件和一组文件，断点续传用-c参数<BR>lftp ................:/&gt; get -c ls-lR.txt<BR>lftp 
+...............:/&gt; mget *.txt<BR>* 
+镜像(反镜像即上传)一个目录，可以用多个线程并行镜像一个目录(--parallel=N)<BR>lftp ................:/&gt; 
+mirror incoming local_name<BR>lftp ................:/&gt; mirror -R 
+local_name<BR>lftp ................:/&gt; mirror --parallel=3 incoming 
+local_name<BR>* 多线程下载，类似网络蚂蚁的功能;缺省是5个线程<BR>lftp ................:/&gt; pget -n 4 
+ls-lR.txt<BR>* 后台任务管理<BR>缺省情况下，按 
+Ctrl+z,正在执行的任务将转为后台执行，也可以在命令行末尾加&amp;符号使任务在后台执行。用jobs命令可以查看所有的后台进程。用queue命令可以排队新的任务。如果退出lftp是还有任务在后台执行，lftp将转为后台执行。<BR>* 
+其它用法<BR>lftp支持类似bash的管道操作，例如用下面的命令可以将ftp服务器上的特定目录下(也可以是整个站点)所有文件的大小存到本地的文件ls.txt中<BR>lftp 
+................:/&gt; du incoming &gt; 
+ls.txt<BR>相关文件<BR>/etc/lftp.conf<BR>全局配置文件，实际位置依赖系统配置文件目录，可能在/etc，也可能在/usr/local/etc<BR>~/.lftp/rc, 
+~/.lftprc<BR>用户配置文件，将在/etc/lftp.conf之后执行，所以这里面的设置会覆盖/etc/lftp.conf中的设置。<BR>lftp 
+缺省不会显示 ftp 服务器的欢迎信息和错误信息，这在很多时候不方便，因为你有可能想知道这个服务器到底是因为没开机连不上，还是连接数已满。如果是这样，你可以在 
+~/.lftprc 里写入一行<BR>debug 3<BR>就可以看到出错信息了。<BR>更多的配置选项请查man手册或在lftp界面内用命令 set -a 
+获得。<BR>~/.lftp/log<BR>当lftp转为后台非挂起模式执行时，输出将重定向到这里<BR>~/.lftp/bookmarks<BR>这是lftp存储书签的地方，可以lftp查看bookmark命令<BR>~/.lftp/cwd_history<BR>这个文件用来存储访问过的站点的工作目录 
+</P>
+<P>~/.lftprc <BR>在用lftp访问国内一些ftp服务器时，往往看到的中文是乱码 
+<BR>^_^不用慌，这是由于服务器和本地编码不一致造成的。我们只要在主目录下新建一个文件~/.lftprc或者~/.lftp/rc 
+<BR>并在其中加入以下内容： <BR>debug 3set ftp:charset GBKset file:charset UTF-8#set 
+ftp:passtive-mode no#alias utf8 " set ftp:charset UTF-8"#alias gbk " set 
+ftp:charset GBK" <BR>登录ftp服务器 <BR>言归正传，我们先来看看怎么登录ftp服务器 <BR>lftp 
+ftp://user:password@site:port <BR>lftp user:password@site:port <BR>lftp site -p 
+port -u user,password <BR>lftp site:port -u user,password 
+<BR>上面的几种方式都能正常工作，不过密码都是明文，这样好像不太安全哦。没关系 <BR>lftp user@site:port 
+<BR>系统会提示输入password，密码就回显为******了 <BR>不过每次都输入这么多，好麻烦哦。 
+如果有类似leapftp的站点管理器就好了，其实lftp早就给我们想好了： 这就是bookmark。后面我们将会看到。 <BR>常用命令 <BR>在终端运行 
+<BR>man lftp <BR>或登录ftp后输入 <BR>help <BR>就可以看到命令列表 <BR>下面我们看一下lftp常用的命令： <BR>ls 
+<BR>显示远端文件列表(!ls 显示本地文件列表)。 <BR>cd <BR>切换远端目录(lcd 切换本地目录)。 <BR>get <BR>下载远端文件。 
+<BR>mget <BR>下载远端文件(可以用通配符也就是 *)。 <BR>pget <BR>使用多个线程来下载远端文件, 预设为五个。 <BR>mirror 
+<BR>下载/上传(mirror -R)/同步 整个目录。 <BR>put <BR>上传文件。 <BR>mput <BR>上传多个文件(支持通配符)。 
+<BR>mv <BR>移动远端文件(远端文件改名)。 <BR>rm <BR>删除远端文件。 <BR>mrm <BR>删除多个远端文件(支持通配符)。 
+<BR>mkdir <BR>建立远端目录。 <BR>rmdir <BR>删除远端目录。 <BR>pwd <BR>显示目前远端所在目录(lpwd 显示本地目录)。 
+<BR>du <BR>计算远端目录的大小 <BR>! <BR>执行本地 shell的命令(由于lftp 没有 lls, 故可用 !ls 来替代) <BR>lcd 
+<BR>切换本地目录 <BR>lpwd <BR>显示本地目录 <BR>alias <BR>定义别名 <BR>bookmark <BR>设定书签。 
+<BR>exit <BR>退出ftp <BR>快捷书签 <BR>补充作者：aBiNg 
+<BR>ftp中的bookmark命令，是将配置写到~/.lftp/bookmarks文件中；我们可以直接修改此文件，快速登陆ftp服务器。 </P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>3、mirror 同步镜像，备份服务器文件</P>
+<P>今天主要的问题是解决如何备份服务器端文件的问题。了解了mirror指令的用法后，发现比较适合而且好用。</P>
+<P>&nbsp;</P>
+<P>基本使用方法：</P>
+<P>1）、下载服务器端文件：</P>
+<P># mirror –vn RCD LCD&nbsp;&nbsp; //RCD为远程路径，LCD为本地路径</P>
+<P>2）、上传文件：</P>
+<P># mirror –R LCD RCD </P>
+<P>&nbsp;</P>
+<P>下附一个自动同步的脚本：</P>
+<P>#!bin/bash<BR>echo “script start at&nbsp; `date ”+%Y-%m-%d 
+%H:%M:%S”<BR>HOST=”hostname”<BR>USER=”yourname”<BR>PASS=”password”<BR>LCD=”LocalePath”<BR>RCD=”RemotePath”<BR>/usr/sbin/lftp 
+&lt;&lt; EOF<BR>open <A href="ftp://$USER">ftp://$USER:</A>$PASS@$HOST<BR>mirror 
+$RCD $LCD<BR>EOF<BR>echo “script end at “ `date ”+%Y-%m-%d %H:%M:%S” </P>
+<P>&nbsp; </P>
+<P>P.S： </P>
+<P>昨天刚到，今天立马开工干活，还是有点压力的，但有压力是好事，督促自己努力加油！ </P>
+<P>认真思考总结，才能更好更快的成长！</P></DIV>
+<DIV style="DISPLAY: block" id=MySignature 
+jQuery1705313137303083111="1">多思考，多总结，快乐成长！</DIV>
+<DIV class=clear></DIV>
+<DIV id=blog_post_info_block>
+<DIV id=BlogPostCategory>分类: <A 
+href="http://www.cnblogs.com/LJ-fish/category/237415.html">Linux</A></DIV>
+<DIV id=EntryTag></DIV>
+<DIV id=blog_post_info>
+<DIV id=green_channel>绿色通道： <A id=green_channel_digg 
+onclick="DiggIt(1686607,cb_blogId,1);green_channel_success(this,'谢谢推荐！');" 
+href="javascript:void(0);">好文要顶</A> <A id=green_channel_follow 
+onclick=c_follow(); href="javascript:void(0);">关注我</A> <A 
+id=green_channel_favorite onclick="AddToWz(cb_entryId);return false;" 
+href="javascript:void(0);">收藏该文</A><A id=green_channel_contact 
+href="http://space.cnblogs.com/msg/send/%e9%85%b7%e9%85%b7%e7%9a%84%e5%b0%8f%e9%b1%bc%e5%84%bf" 
+target=_blank>与我联系</A> <A id=green_channel_weibo title=分享至新浪微博 
+onclick=ShareToTsina() href="javascript:void(0);"><IMG alt="" 
+src="http://static.cnblogs.com/images/icon_weibo_24.png"></A> </DIV>
+<DIV id=author_profile>
+<DIV id=author_profile_info class=author_profile_info><A 
+href="http://home.cnblogs.com/u/LJ-fish/" target=_blank><IMG class=author_avatar 
+alt="" src="http://pic.cnitblog.com/face/u116999.jpg"></A> 
+<DIV id=author_profile_detail class=author_profile_info><A 
+href="http://home.cnblogs.com/u/LJ-fish/">酷酷的小鱼儿</A><BR><A 
+href="http://home.cnblogs.com/u/LJ-fish/followees">关注 - 0</A><BR><A 
+href="http://home.cnblogs.com/u/LJ-fish/followers">粉丝 - 6</A> </DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=author_profile_honor></DIV>
+<DIV id=author_profile_follow><A onclick="c_follow();return false;" 
+href="javascript:void(0);">+加关注</A> </DIV></DIV>
+<DIV id=div_digg>
+<DIV class=diggit onclick="votePost(1686607,'Digg')"><SPAN id=digg_count 
+class=diggnum>1</SPAN> </DIV>
+<DIV class=buryit onclick="votePost(1686607,'Bury')"><SPAN id=bury_count 
+class=burynum>0</SPAN> </DIV>
+<DIV class=clear></DIV>
+<DIV id=digg_tips class=diggword>(请您对文章做出评价) </DIV></DIV></DIV>
+<DIV class=clear></DIV>
+<DIV id=post_next_prev><A class=p_n_p_prefix 
+href="http://www.cnblogs.com/LJ-fish/archive/2010/03/08/1681159.html">« 
+</A>上一篇：<A title="发布于2010-03-08 23:33" 
+href="http://www.cnblogs.com/LJ-fish/archive/2010/03/08/1681159.html">codeblocks安装中文包时的注意事项</A><BR><A 
+class=p_n_p_prefix 
+href="http://www.cnblogs.com/LJ-fish/archive/2010/03/27/1698580.html">» 
+</A>下一篇：<A title="发布于2010-03-27 21:27" 
+href="http://www.cnblogs.com/LJ-fish/archive/2010/03/27/1698580.html">最简单的HTTP服务器实现，学习笔记</A><BR></DIV></DIV></DIV>
+<DIV class=postDesc>posted @ <SPAN id=post-date>2010-03-15 19:37</SPAN> <A 
+href="http://www.cnblogs.com/LJ-fish/">酷酷的小鱼儿</A> 阅读(<SPAN 
+id=post_view_count>38837</SPAN>) 评论(<SPAN id=post_comment_count>0</SPAN>) <A 
+href="http://i.cnblogs.com/EditPosts.aspx?postid=1686607" rel=nofollow>编辑</A> <A 
+onclick="AddToWz(1686607);return false;" href="#">收藏</A></DIV></DIV>
+<SCRIPT type=text/javascript>var allowComments=true,isLogined=false,cb_blogId=67180,cb_entryId=1686607,cb_blogApp=currentBlogApp,cb_blogUserGuid='94fac0cb-bf25-df11-ba8f-001cf0cd104b',cb_entryCreatedDate='2010/3/15 19:37:00';loadViewCount(cb_entryId);</SCRIPT>
+</DIV><!--end: topics 文章、评论容器--><A name=!comments></A>
+<DIV id=blog-comments-placeholder>&nbsp;</DIV>
+<SCRIPT type=text/javascript>var commentManager = new blogCommentManager();commentManager.renderComments(0);</SCRIPT>
+
+<DIV id=comment_form class=commentform><A name=commentform></A>
+<DIV id=divCommentShow></DIV>
+<DIV id=comment_nav><SPAN id=span_refresh_tips></SPAN><A id=lnk_RefreshComments 
+onclick="return RefreshCommentList();" href="javascript:void(0);">刷新评论</A><A 
+onclick="return RefreshPage();" href="#">刷新页面</A><A href="#top">返回顶部</A></DIV>
+<DIV id=comment_form_container>
+<DIV class=login_tips>注册用户登录后才能发表评论，请 <A class=underline 
+onclick="return login('commentform');" href="javascript:void(0);" 
+rel=nofollow>登录</A> 或 <A class=underline onclick="return register();" 
+href="javascript:void(0);" rel=nofollow>注册</A>，<A 
+href="http://www.cnblogs.com">访问</A>网站首页。</DIV></DIV>
+<DIV id=ad_text_under_commentbox class=ad_text_commentbox></DIV>
+<DIV id=site_nav_under><A href="http://www.imooc.com/view/243?from=cnblogs" 
+target=_blank><B>【免费课程】用字体在网页中画ICON图标</B></A><BR><A 
+href="http://www.ucancode.com/index.htm" target=_blank>【推荐】50万行VC++源码: 
+大型组态工控、电力仿真CAD与GIS源码库</A><BR><A href="http://www.rongcloud.cn/promotion" 
+target=_blank>融云，免费为你的App加入IM功能——让你的App“聊”起来！！</A></DIV>
+<DIV id=opt_under_post></DIV>
+<SCRIPT type=text/javascript>
+    var enableGoogleAd = canShowAdsense(); var googletag = googletag || {}; googletag.cmd = googletag.cmd || [];
+    fixPostBodyFormat();
+</SCRIPT>
+
+<DIV id=ad_under_post_holder>
+<SCRIPT type=text/javascript>
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    (function () {
+        if (enableGoogleAd) {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        }
+    })();
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+    try {
+        if (enableGoogleAd) {
+            googletag.cmd.push(function () {
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C1_sitehome', [300, 250], 'div-gpt-ad-1346480159711-0').addService(googletag.pubads());
+                googletag.defineSlot('/1090369/cnblogs_blogpost_C2', [468, 60], 'div-gpt-ad-1410860226396-0').addService(googletag.pubads());
+                googletag.pubads().enableSingleRequest();
+                googletag.enableServices();
+            });
+        };
+    } catch (e) { }
+</SCRIPT>
+
+<DIV id=google_ad_c1 class=c_ad_block>
+<DIV style="WIDTH: 300px; HEIGHT: 250px" id=div-gpt-ad-1346480159711-0>
+<SCRIPT type=text/javascript>
+        try {
+            if (enableGoogleAd) {
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1346480159711-0'); });            
+            } else {
+                $('#div-gpt-ad-1346480159711-0').hide();
+            }
+    } catch (e) { }
+    </SCRIPT>
+
+<DIV 
+style="BORDER-BOTTOM: 0pt; BORDER-LEFT: 0pt; WIDTH: 300px; DISPLAY: inline-block; HEIGHT: 250px; BORDER-TOP: 0pt; BORDER-RIGHT: 0pt" 
+id=google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__container__ 
+name="google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0__container__"><IFRAME 
+style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; VERTICAL-ALIGN: bottom; BORDER-TOP: 0px; BORDER-RIGHT: 0px" 
+id=google_ads_iframe_/1090369/cnblogs_blogpost_C1_sitehome_0 height=250 
+marginHeight=0 
+src="http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html#xpc=sf-gdn-exp-1&amp;p=http%3A//www.cnblogs.com" 
+frameBorder=0 width=300 allowTransparency 
+name="1-0-2;53038;<html>&#10;<head>&#10;<script>var inDapIF=true;</script>&#10;</head><body><style>body{margin:0;padding:0}</style><script>window.dabtiming={report:function(){},load:{tick:function(){}}};</script><div id=&quot;google_flash_inline_div&quot; style=&quot;position:relative;z-index:1001;width:300px&quot;><div id=&quot;google_flash_div&quot; style=&quot;position:absolute;left:0px;z-index:1001&quot;><OBJECT classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; id=&quot;google_flash_obj&quot; codebase=&quot;//download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0&quot; WIDTH=&quot;300&quot; HEIGHT=&quot;250&quot;><PARAM NAME=movie VALUE=&quot;http://pagead2.googlesyndication.com/pagead/gadgets/teracent_product_template_V1/DAB_shell.swf&quot;><PARAM NAME=quality VALUE=high><PARAM NAME=&quot;AllowScriptAccess&quot; VALUE=&quot;always&quot;><PARAM NAME=&quot;wmode&quot; VALUE=&quot;opaque&quot;><PARAM NAME=&quot;FlashVars&quot; VALUE=&quot;google_xml_addata=%3CTEMPLATE_PARAMETERS%3E%3CTEMPLATE_WIDTH%3E300%3C/TEMPLATE_WIDTH%3E%3CTEMPLATE_HEIGHT%3E250%3C/TEMPLATE_HEIGHT%3E%3CTEMPLATE_URL%3Ehttp%3A//pagead2.googlesyndication.com/pagead/gadgets/teracent_product_template_V1/MinimalCarousel_1a-2-50_300x250.swf%3C/TEMPLATE_URL%3E%3CTEMPLATE_AIT_URL%3Ehttp%3A//googleads.g.doubleclick.net/pagead/conversion/%3Fai%3DC7t-3TUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQBiAYBoAYZgAf6kq8D2AcA%26amp%3Bsigh%3D2GeMAVq-VTM%26amp%3Blabel%3D_AITNAME_%26amp%3Bvalue%3D_AITVALUE_%3C/TEMPLATE_AIT_URL%3E%3CTEMPLATE_ELEMENT+element_name%3D%22adData%22+index%3D%220%22%3E%3CTEMPLATE_FIELD+field_name%3D%22creationContext%22%3EWORKFLOW%3ABURDOCK,TEMPLATE_SOURCE%3AAD_GALLERY%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_fontUrl%22%3EAGBookRoundedProMedium_basic.swf%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_txtColorDisc%22%3E0x666666%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Headline_0_productClickOnly%22%3ETRUE%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_cornerStyle%22%3Eround%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_glowColor%22%3E0x555555%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_priceSize%22%3E18%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_txtColorPrice%22%3E0x990000%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Headline_0_showPrice%22%3ETRUE%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_nameSize%22%3E11%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_txtColorProduct%22%3E0x000000%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_bgAlpha%22%3E0%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_bgGradient%22%3EFALSE%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_borderColor%22%3E0x990000%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_bgColorAlt%22%3E0xffffff%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_bgColor%22%3E0xfefefe%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_logoPadding%22%3E0%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_btnShad%22%3ETRUE%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_btnBevel%22%3ETRUE%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_btnStyle%22%3Eround%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_btnRollColor%22%3E0x330000%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_btnColor%22%3E0x990000%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_txtColorCta%22%3E0xffffff%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Headline_0_cta%22%3E%E7%AB%8B%E5%8D%B3%E6%8A%A2%E8%B4%AD%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_headlineSize%22%3E20%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_txtColorTitle%22%3E0xcc0000%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Headline_0_txt%22%3E%E5%A4%9A%E3%80%81%E5%BF%AB%E3%80%81%E5%A5%BD%E3%80%81%E7%9C%81%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_enforceLogo%22%3Efalse%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_logoImageUrl%22%3Ehttp%3A//pagead2.googlesyndication.com/pagead/imgad%3Fid%3DCICAgKCNj8rmRRDeAhiDATIIsnGAvi2bl5Q%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22layout%22%3EMinimalCarousel_1a-2-50%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_0_name%22%3E%E4%B8%AD%E5%85%B4+U960E+%E6%B7%B1%E8%93%9D%E8%89%B2+%E7%A7%BB%E5%8A%A83G%E6%89%8B%E6%9C%BA+%E5%8F%8C%E5%8D%A1%E5%8F%8C%E5%BE%85%E5%8F%8C%E9%80%9A%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_0_description%22%3E%E4%B8%AD%E5%85%B4+U960E+%E6%B7%B1%E8%93%9D%E8%89%B2+%E7%A7%BB%E5%8A%A83G%E6%89%8B%E6%9C%BA+%E5%8F%8C%E5%8D%A1%E5%8F%8C%E5%BE%85%E5%8F%8C%E9%80%9A%E3%80%82%C2%A5388.0%E5%85%A8%E6%96%B0,%E8%B6%85%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94,%E6%80%A7%E8%83%BD%E5%87%BA%E8%89%B2,%E6%97%B6%E5%B0%9A%E4%B9%8B%E9%80%89!%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_0_price%22%3E%EF%BF%A5%C2%A0388.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_0_regularPrice%22%3E%EF%BF%A5%C2%A0388.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_0_imageUrl%22%3Ehttp%3A//t0.gstatic.cn/shopping%3Fq%3Dtbn%3AANd9GcRBDk2B-IZNnSFcG1pqCcNdD9ZzaTIJH72CoHkqPNDq7pv_uzJ_B5l58Yq4L4g%26amp%3Busqp%3DCAI%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_0_url%22%3Ehttp%3A//www.googleadservices.com/pagead/aclk%3Fsa%3DL%26amp%3Bai%3DClHRLTUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQB-gUGCCUQARgAiAYBoAYZgAf6kq8D2AcA%26amp%3Bnum%3D1%26amp%3Bcid%3D5Gj_tR2QzY4uE5D7qquGmofz%26amp%3Bsig%3DAOD64_15LOmBLPrL4UHY3V8r8v92GBYS_A%26amp%3Badurl%3Dhttp%3A//dc.jd.com/auto.php%253Fservice%253Dtransfer%2526type%253Dsem%2526from%253Dmedia%2526semid%253Dsemmedia%2526pl%253D0%2526ad%253D0%2526kid%253D4%2526klid%253D377012014%2526to%253Dhttp%3A//item.jd.com/1145233.html%26amp%3Bclient%3Dca-pub-4210569241504288%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_1_name%22%3E%E8%BF%AA%E5%A3%AB%E5%B0%BC(Disney)+%E9%92%A2%E9%93%81%E4%BE%A0+8GU%E7%9B%98+%E9%92%A2%E9%93%81%E4%BE%A0%E6%89%8B%E7%94%B2%E5%8F%B3%E8%87%82%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_1_description%22%3E%E8%BF%AA%E5%A3%AB%E5%B0%BC(Disney)+%E9%92%A2%E9%93%81%E4%BE%A0+8GU%E7%9B%98+%E9%92%A2%E9%93%81%E4%BE%A0%E6%89%8B%E7%94%B2%E5%8F%B3%E8%87%82%E3%80%82%C2%A5239.0%E5%85%A8%E6%96%B0,8G%E8%B6%85%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94,%E6%80%A7%E8%83%BD%E5%87%BA%E8%89%B2,%E6%97%B6%E5%B0%9A%E4%B9%8B%E9%80%89!%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_1_price%22%3E%EF%BF%A5%C2%A0239.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_1_regularPrice%22%3E%EF%BF%A5%C2%A0239.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_1_imageUrl%22%3Ehttp%3A//t3.gstatic.cn/shopping%3Fq%3Dtbn%3AANd9GcTqPpnFePLwMWMHbxJNPSA7HxcSQXbdbuP5454IqdyXeVLC67SQgU5J7RRtNA%26amp%3Busqp%3DCAI%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_1_url%22%3Ehttp%3A//www.googleadservices.com/pagead/aclk%3Fsa%3DL%26amp%3Bai%3DCAkp-TUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQB-gUGCCUQARgBiAYBoAYZgAf6kq8D2AcA%26amp%3Bnum%3D1%26amp%3Bcid%3D5Gj_tR2QzY4uE5D7qquGmofz%26amp%3Bsig%3DAOD64_1QN193lIy7V2_GLXitz-6TiSjV8g%26amp%3Badurl%3Dhttp%3A//dc.jd.com/auto.php%253Fservice%253Dtransfer%2526type%253Dsem%2526from%253Dmedia%2526semid%253Dsemmedia%2526pl%253D0%2526ad%253D0%2526kid%253D4%2526klid%253D377012014%2526to%253Dhttp%3A//item.jd.com/905734.html%26amp%3Bclient%3Dca-pub-4210569241504288%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_2_name%22%3E%E9%9B%AA%E6%9B%BC(XUEMAN)+%E6%AC%A7%E7%BE%8E%E5%A5%B3%E5%8C%85+OL%E8%81%8C%E4%B8%9A%E6%B0%94%E8%B4%A8%E5%A5%B3%E5%A3%AB%E6%89%8B%E6%8F%90%E5%8D%95%E8%82%A9%E5%8C%85+8305%E7%8E%AB%E7%BA%A2%E8%89%B2%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_2_description%22%3E%E9%9B%AA%E6%9B%BC(XUEMAN)+%E6%AC%A7%E7%BE%8E%E5%A5%B3%E5%8C%85+OL%E8%81%8C%E4%B8%9A%E6%B0%94%E8%B4%A8%E5%A5%B3%E5%A3%AB%E6%89%8B%E6%8F%90%E5%8D%95%E8%82%A9%E5%8C%85+8305%E7%8E%AB%E7%BA%A2%E8%89%B2%E3%80%82%C2%A5158.0%E5%85%A8%E6%96%B0,1%E8%B6%85%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94,%E6%80%A7%E8%83%BD%E5%87%BA%E8%89%B2,%E6%97%B6%E5%B0%9A%E4%B9%8B%E9%80%89!%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_2_price%22%3E%EF%BF%A5%C2%A0158.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_2_regularPrice%22%3E%EF%BF%A5%C2%A0158.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_2_imageUrl%22%3Ehttp%3A//t0.gstatic.cn/shopping%3Fq%3Dtbn%3AANd9GcSkeT1LOxX_8jszAjnoBC6cFE5xAA07cJRwfGUDzUC5HgJPuitsxIrmldMuug%26amp%3Busqp%3DCAI%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_2_url%22%3Ehttp%3A//www.googleadservices.com/pagead/aclk%3Fsa%3DL%26amp%3Bai%3DCt145TUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQB-gUGCCUQARgCiAYBoAYZgAf6kq8D2AcA%26amp%3Bnum%3D1%26amp%3Bcid%3D5Gj_tR2QzY4uE5D7qquGmofz%26amp%3Bsig%3DAOD64_1S_ASu1OzzLdXBqmRsoFrcg_l4DA%26amp%3Badurl%3Dhttp%3A//dc.jd.com/auto.php%253Fservice%253Dtransfer%2526type%253Dsem%2526from%253Dmedia%2526semid%253Dsemmedia%2526pl%253D0%2526ad%253D0%2526kid%253D4%2526klid%253D377012014%2526to%253Dhttp%3A//item.jd.com/1167845.html%26amp%3Bclient%3Dca-pub-4210569241504288%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_3_name%22%3E%E9%85%B7%E5%86%B7%E8%87%B3%E5%B0%8A(CoolerMaster)+V8GTS%E5%A4%9A%E5%B9%B3%E5%8F%B0CPU%E6%95%A3%E7%83%AD%E5%99%A8+(%E5%9D%87%E6%B8%A9%E6%9D%BF/8%E7%83%AD%E7%AE%A1/+140MM%E9%AB%98%E6%95%88%E9%9D%99%E9%9F%B3%E9%A3%8E%E6%89%87/%E7%AE%80%E6%98%93%E5%AE%89%E8%A3%9D)%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_3_description%22%3E%E9%85%B7%E5%86%B7%E8%87%B3%E5%B0%8A(CoolerMaster)+V8GTS%E5%A4%9A%E5%B9%B3%E5%8F%B0CPU%E6%95%A3%E7%83%AD%E5%99%A8+(%E5%9D%87%E6%B8%A9%E6%9D%BF/8%E7%83%AD%E7%AE%A1/+140MM%E9%AB%98%E6%95%88%E9%9D%99%E9%9F%B3%E9%A3%8E%E6%89%87/%E7%AE%80%E6%98%93%E5%AE%89%E8%A3%9D)%E3%80%82%C2%A5649.0%E5%85%A8%E6%96%B0,%E8%B6%85%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94,%E6%80%A7%E8%83%BD%E5%87%BA%E8%89%B2,%E6%97%B6%E5%B0%9A%E4%B9%8B%E9%80%89!%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_3_price%22%3E%EF%BF%A5%C2%A0649.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_3_regularPrice%22%3E%EF%BF%A5%C2%A0649.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_3_imageUrl%22%3Ehttp%3A//t0.gstatic.cn/shopping%3Fq%3Dtbn%3AANd9GcQppzHBbsoOqa3wj2QHuIqoBJaIfMYajncebahhVNH35ExfwXTaDwotN04doxg%26amp%3Busqp%3DCAI%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_3_url%22%3Ehttp%3A//www.googleadservices.com/pagead/aclk%3Fsa%3DL%26amp%3Bai%3DCua7eTUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQB-gUGCCUQARgDiAYBoAYZgAf6kq8D2AcA%26amp%3Bnum%3D1%26amp%3Bcid%3D5Gj_tR2QzY4uE5D7qquGmofz%26amp%3Bsig%3DAOD64_13bVB8T77rVa9cpNxmOvoUkAdwOA%26amp%3Badurl%3Dhttp%3A//dc.jd.com/auto.php%253Fservice%253Dtransfer%2526type%253Dsem%2526from%253Dmedia%2526semid%253Dsemmedia%2526pl%253D0%2526ad%253D0%2526kid%253D4%2526klid%253D377012014%2526to%253Dhttp%3A//item.jd.com/1058207.html%26amp%3Bclient%3Dca-pub-4210569241504288%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_4_name%22%3E%E7%AC%91%E8%96%87+XIAOWEI+%E6%97%B6%E5%B0%9A%E6%AC%A7%E7%BE%8E%E6%B3%A2%E5%A3%AB%E9%A1%BF%E5%8D%95%E8%82%A9%E6%96%9C%E8%B7%A8%E5%8C%85%E5%A5%B3%E5%8C%85%E5%AD%90%E6%AF%8D%E5%8C%85%E4%BA%94%E4%BB%B6%E5%A5%97%E5%A5%B3%E5%A3%AB%E6%89%8B%E6%8F%90%E5%8C%85%E5%8C%855725%E9%85%92%E7%BA%A2%E8%89%B2%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_4_description%22%3E%E7%AC%91%E8%96%87+XIAOWEI+%E6%97%B6%E5%B0%9A%E6%AC%A7%E7%BE%8E%E6%B3%A2%E5%A3%AB%E9%A1%BF%E5%8D%95%E8%82%A9%E6%96%9C%E8%B7%A8%E5%8C%85%E5%A5%B3%E5%8C%85%E5%AD%90%E6%AF%8D%E5%8C%85%E4%BA%94%E4%BB%B6%E5%A5%97%E5%A5%B3%E5%A3%AB%E6%89%8B%E6%8F%90%E5%8C%85%E5%8C%855725%E9%85%92%E7%BA%A2%E8%89%B2%E3%80%82%C2%A5109.0%E5%85%A8%E6%96%B0,1%E8%B6%85%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94,%E6%80%A7%E8%83%BD%E5%87%BA%E8%89%B2,%E6%97%B6%E5%B0%9A%E4%B9%8B%E9%80%89!%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_4_price%22%3E%EF%BF%A5%C2%A0109.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_4_regularPrice%22%3E%EF%BF%A5%C2%A0109.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_4_imageUrl%22%3Ehttp%3A//t1.gstatic.cn/shopping%3Fq%3Dtbn%3AANd9GcRJGhZBv73D6-ahu73DMUGq0I2MwISsaXXSrkLkb29_5iFMX3iA16Fo8ZoIfk8%26amp%3Busqp%3DCAI%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_4_url%22%3Ehttp%3A//www.googleadservices.com/pagead/aclk%3Fsa%3DL%26amp%3Bai%3DCTkvZTUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQB-gUGCCUQARgEiAYBoAYZgAf6kq8D2AcA%26amp%3Bnum%3D1%26amp%3Bcid%3D5Gj_tR2QzY4uE5D7qquGmofz%26amp%3Bsig%3DAOD64_0o9qH5HzKKbgUo5nfS5jTeI43MZw%26amp%3Badurl%3Dhttp%3A//dc.jd.com/auto.php%253Fservice%253Dtransfer%2526type%253Dsem%2526from%253Dmedia%2526semid%253Dsemmedia%2526pl%253D0%2526ad%253D0%2526kid%253D4%2526klid%253D377012014%2526to%253Dhttp%3A//item.jd.com/1278850.html%26amp%3Bclient%3Dca-pub-4210569241504288%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_5_name%22%3E%E9%9B%AA%E6%9B%BC(XUEMAN)%E6%B0%94%E8%B4%A8%E5%A5%B3%E5%8C%85+%E7%99%BE%E6%90%AD%E5%8D%95%E8%82%A9%E5%8C%85%E5%A5%B3%E5%A3%AB%E6%89%8B%E6%8F%90%E6%96%9C%E6%8C%8E%E5%8C%85+8300%E5%8D%87%E7%BA%A7%E7%89%88%E8%97%8F%E8%93%9D%E8%89%B2%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_5_description%22%3E%E9%9B%AA%E6%9B%BC(XUEMAN)%E6%B0%94%E8%B4%A8%E5%A5%B3%E5%8C%85+%E7%99%BE%E6%90%AD%E5%8D%95%E8%82%A9%E5%8C%85%E5%A5%B3%E5%A3%AB%E6%89%8B%E6%8F%90%E6%96%9C%E6%8C%8E%E5%8C%85+8300%E5%8D%87%E7%BA%A7%E7%89%88%E8%97%8F%E8%93%9D%E8%89%B2%E3%80%82%C2%A599.0%E5%85%A8%E6%96%B0,1%E8%B6%85%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94,%E6%80%A7%E8%83%BD%E5%87%BA%E8%89%B2,%E6%97%B6%E5%B0%9A%E4%B9%8B%E9%80%89!%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_5_price%22%3E%EF%BF%A5%C2%A099.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_5_regularPrice%22%3E%EF%BF%A5%C2%A099.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_5_imageUrl%22%3Ehttp%3A//t2.gstatic.cn/shopping%3Fq%3Dtbn%3AANd9GcT2f3t2-VcfOIQ2NuWDGSeti5bUj1PBIFfzjx7i_9evLfp-D40QOktwkCeedQ%26amp%3Busqp%3DCAI%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_5_url%22%3Ehttp%3A//www.googleadservices.com/pagead/aclk%3Fsa%3DL%26amp%3Bai%3DC7pCATUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQB-gUGCCUQARgFiAYBoAYZgAf6kq8D2AcA%26amp%3Bnum%3D1%26amp%3Bcid%3D5Gj_tR2QzY4uE5D7qquGmofz%26amp%3Bsig%3DAOD64_0SWGF1clMOc55GEiAZ9w-Jnf97Jg%26amp%3Badurl%3Dhttp%3A//dc.jd.com/auto.php%253Fservice%253Dtransfer%2526type%253Dsem%2526from%253Dmedia%2526semid%253Dsemmedia%2526pl%253D0%2526ad%253D0%2526kid%253D4%2526klid%253D377012014%2526to%253Dhttp%3A//item.jd.com/1232690.html%26amp%3Bclient%3Dca-pub-4210569241504288%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22displayUrl%22%3Ewww.jd.com%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22destinationUrl%22%3Ehttp%3A//dc.jd.com/auto.php%3Fservice%3Dtransfer%26amp%3Btype%3Dsem%26amp%3Bfrom%3Dmedia%26amp%3Bsemid%3Dsemmedia%26amp%3Bpl%3D0%26amp%3Bad%3D0%26amp%3Bkid%3D4%26amp%3Bklid%3D377012014%26amp%3Bto%3Dhttp%3A//www.jd.com%3C/TEMPLATE_FIELD%3E%3C/TEMPLATE_ELEMENT%3E%3C/TEMPLATE_PARAMETERS%3E&amp;google_width=300&amp;google_height=250&amp;destination_url=http%3A//dc.jd.com/auto.php%3Fservice%3Dtransfer%26type%3Dsem%26from%3Dmedia%26semid%3Dsemmedia%26pl%3D0%26ad%3D0%26kid%3D4%26klid%3D377012014%26to%3Dhttp%3A//www.jd.com&amp;display_url=www.jd.com&amp;google_click_url=http://www.googleadservices.com/pagead/aclk%3Fsa%3DL%26ai%3DC7t-3TUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQBiAYBoAYZgAf6kq8D2AcA%26num%3D1%26cid%3D5Gj_tR2QzY4uE5D7qquGmofz%26sig%3DAOD64_0h31klaftqD-oJH3v1TSbNuFt_pA%26client%3Dca-pub-4210569241504288%26adurl%3D&amp;google_ait_url=http%3A//googleads.g.doubleclick.net/pagead/conversion/%3Fai%3DC7t-3TUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQBiAYBoAYZgAf6kq8D2AcA%26sigh%3D2GeMAVq-VTM%26label%3D_AITNAME_%26value%3D_AITVALUE_&amp;google_target_in_new_window=true&amp;flash_element_id=google_flash_obj&quot;><object data=&quot;http://pagead2.googlesyndication.com/pagead/gadgets/teracent_product_template_V1/DAB_shell.swf&quot; id=&quot;google_flash_embed&quot; WIDTH=&quot;300&quot; HEIGHT=&quot;250&quot; WMODE=&quot;opaque&quot; FlashVars=&quot;google_xml_addata=%3CTEMPLATE_PARAMETERS%3E%3CTEMPLATE_WIDTH%3E300%3C/TEMPLATE_WIDTH%3E%3CTEMPLATE_HEIGHT%3E250%3C/TEMPLATE_HEIGHT%3E%3CTEMPLATE_URL%3Ehttp%3A//pagead2.googlesyndication.com/pagead/gadgets/teracent_product_template_V1/MinimalCarousel_1a-2-50_300x250.swf%3C/TEMPLATE_URL%3E%3CTEMPLATE_AIT_URL%3Ehttp%3A//googleads.g.doubleclick.net/pagead/conversion/%3Fai%3DC7t-3TUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQBiAYBoAYZgAf6kq8D2AcA%26amp%3Bsigh%3D2GeMAVq-VTM%26amp%3Blabel%3D_AITNAME_%26amp%3Bvalue%3D_AITVALUE_%3C/TEMPLATE_AIT_URL%3E%3CTEMPLATE_ELEMENT+element_name%3D%22adData%22+index%3D%220%22%3E%3CTEMPLATE_FIELD+field_name%3D%22creationContext%22%3EWORKFLOW%3ABURDOCK,TEMPLATE_SOURCE%3AAD_GALLERY%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_fontUrl%22%3EAGBookRoundedProMedium_basic.swf%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_txtColorDisc%22%3E0x666666%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Headline_0_productClickOnly%22%3ETRUE%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_cornerStyle%22%3Eround%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_glowColor%22%3E0x555555%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_priceSize%22%3E18%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_txtColorPrice%22%3E0x990000%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Headline_0_showPrice%22%3ETRUE%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_nameSize%22%3E11%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_txtColorProduct%22%3E0x000000%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_bgAlpha%22%3E0%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_bgGradient%22%3EFALSE%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_borderColor%22%3E0x990000%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_bgColorAlt%22%3E0xffffff%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_bgColor%22%3E0xfefefe%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_logoPadding%22%3E0%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_btnShad%22%3ETRUE%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_btnBevel%22%3ETRUE%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_btnStyle%22%3Eround%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_btnRollColor%22%3E0x330000%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_btnColor%22%3E0x990000%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_txtColorCta%22%3E0xffffff%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Headline_0_cta%22%3E%E7%AB%8B%E5%8D%B3%E6%8A%A2%E8%B4%AD%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_headlineSize%22%3E20%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_txtColorTitle%22%3E0xcc0000%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Headline_0_txt%22%3E%E5%A4%9A%E3%80%81%E5%BF%AB%E3%80%81%E5%A5%BD%E3%80%81%E7%9C%81%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_enforceLogo%22%3Efalse%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Design_0_logoImageUrl%22%3Ehttp%3A//pagead2.googlesyndication.com/pagead/imgad%3Fid%3DCICAgKCNj8rmRRDeAhiDATIIsnGAvi2bl5Q%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22layout%22%3EMinimalCarousel_1a-2-50%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_0_name%22%3E%E4%B8%AD%E5%85%B4+U960E+%E6%B7%B1%E8%93%9D%E8%89%B2+%E7%A7%BB%E5%8A%A83G%E6%89%8B%E6%9C%BA+%E5%8F%8C%E5%8D%A1%E5%8F%8C%E5%BE%85%E5%8F%8C%E9%80%9A%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_0_description%22%3E%E4%B8%AD%E5%85%B4+U960E+%E6%B7%B1%E8%93%9D%E8%89%B2+%E7%A7%BB%E5%8A%A83G%E6%89%8B%E6%9C%BA+%E5%8F%8C%E5%8D%A1%E5%8F%8C%E5%BE%85%E5%8F%8C%E9%80%9A%E3%80%82%C2%A5388.0%E5%85%A8%E6%96%B0,%E8%B6%85%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94,%E6%80%A7%E8%83%BD%E5%87%BA%E8%89%B2,%E6%97%B6%E5%B0%9A%E4%B9%8B%E9%80%89!%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_0_price%22%3E%EF%BF%A5%C2%A0388.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_0_regularPrice%22%3E%EF%BF%A5%C2%A0388.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_0_imageUrl%22%3Ehttp%3A//t0.gstatic.cn/shopping%3Fq%3Dtbn%3AANd9GcRBDk2B-IZNnSFcG1pqCcNdD9ZzaTIJH72CoHkqPNDq7pv_uzJ_B5l58Yq4L4g%26amp%3Busqp%3DCAI%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_0_url%22%3Ehttp%3A//www.googleadservices.com/pagead/aclk%3Fsa%3DL%26amp%3Bai%3DClHRLTUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQB-gUGCCUQARgAiAYBoAYZgAf6kq8D2AcA%26amp%3Bnum%3D1%26amp%3Bcid%3D5Gj_tR2QzY4uE5D7qquGmofz%26amp%3Bsig%3DAOD64_15LOmBLPrL4UHY3V8r8v92GBYS_A%26amp%3Badurl%3Dhttp%3A//dc.jd.com/auto.php%253Fservice%253Dtransfer%2526type%253Dsem%2526from%253Dmedia%2526semid%253Dsemmedia%2526pl%253D0%2526ad%253D0%2526kid%253D4%2526klid%253D377012014%2526to%253Dhttp%3A//item.jd.com/1145233.html%26amp%3Bclient%3Dca-pub-4210569241504288%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_1_name%22%3E%E8%BF%AA%E5%A3%AB%E5%B0%BC(Disney)+%E9%92%A2%E9%93%81%E4%BE%A0+8GU%E7%9B%98+%E9%92%A2%E9%93%81%E4%BE%A0%E6%89%8B%E7%94%B2%E5%8F%B3%E8%87%82%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_1_description%22%3E%E8%BF%AA%E5%A3%AB%E5%B0%BC(Disney)+%E9%92%A2%E9%93%81%E4%BE%A0+8GU%E7%9B%98+%E9%92%A2%E9%93%81%E4%BE%A0%E6%89%8B%E7%94%B2%E5%8F%B3%E8%87%82%E3%80%82%C2%A5239.0%E5%85%A8%E6%96%B0,8G%E8%B6%85%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94,%E6%80%A7%E8%83%BD%E5%87%BA%E8%89%B2,%E6%97%B6%E5%B0%9A%E4%B9%8B%E9%80%89!%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_1_price%22%3E%EF%BF%A5%C2%A0239.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_1_regularPrice%22%3E%EF%BF%A5%C2%A0239.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_1_imageUrl%22%3Ehttp%3A//t3.gstatic.cn/shopping%3Fq%3Dtbn%3AANd9GcTqPpnFePLwMWMHbxJNPSA7HxcSQXbdbuP5454IqdyXeVLC67SQgU5J7RRtNA%26amp%3Busqp%3DCAI%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_1_url%22%3Ehttp%3A//www.googleadservices.com/pagead/aclk%3Fsa%3DL%26amp%3Bai%3DCAkp-TUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQB-gUGCCUQARgBiAYBoAYZgAf6kq8D2AcA%26amp%3Bnum%3D1%26amp%3Bcid%3D5Gj_tR2QzY4uE5D7qquGmofz%26amp%3Bsig%3DAOD64_1QN193lIy7V2_GLXitz-6TiSjV8g%26amp%3Badurl%3Dhttp%3A//dc.jd.com/auto.php%253Fservice%253Dtransfer%2526type%253Dsem%2526from%253Dmedia%2526semid%253Dsemmedia%2526pl%253D0%2526ad%253D0%2526kid%253D4%2526klid%253D377012014%2526to%253Dhttp%3A//item.jd.com/905734.html%26amp%3Bclient%3Dca-pub-4210569241504288%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_2_name%22%3E%E9%9B%AA%E6%9B%BC(XUEMAN)+%E6%AC%A7%E7%BE%8E%E5%A5%B3%E5%8C%85+OL%E8%81%8C%E4%B8%9A%E6%B0%94%E8%B4%A8%E5%A5%B3%E5%A3%AB%E6%89%8B%E6%8F%90%E5%8D%95%E8%82%A9%E5%8C%85+8305%E7%8E%AB%E7%BA%A2%E8%89%B2%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_2_description%22%3E%E9%9B%AA%E6%9B%BC(XUEMAN)+%E6%AC%A7%E7%BE%8E%E5%A5%B3%E5%8C%85+OL%E8%81%8C%E4%B8%9A%E6%B0%94%E8%B4%A8%E5%A5%B3%E5%A3%AB%E6%89%8B%E6%8F%90%E5%8D%95%E8%82%A9%E5%8C%85+8305%E7%8E%AB%E7%BA%A2%E8%89%B2%E3%80%82%C2%A5158.0%E5%85%A8%E6%96%B0,1%E8%B6%85%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94,%E6%80%A7%E8%83%BD%E5%87%BA%E8%89%B2,%E6%97%B6%E5%B0%9A%E4%B9%8B%E9%80%89!%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_2_price%22%3E%EF%BF%A5%C2%A0158.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_2_regularPrice%22%3E%EF%BF%A5%C2%A0158.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_2_imageUrl%22%3Ehttp%3A//t0.gstatic.cn/shopping%3Fq%3Dtbn%3AANd9GcSkeT1LOxX_8jszAjnoBC6cFE5xAA07cJRwfGUDzUC5HgJPuitsxIrmldMuug%26amp%3Busqp%3DCAI%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_2_url%22%3Ehttp%3A//www.googleadservices.com/pagead/aclk%3Fsa%3DL%26amp%3Bai%3DCt145TUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQB-gUGCCUQARgCiAYBoAYZgAf6kq8D2AcA%26amp%3Bnum%3D1%26amp%3Bcid%3D5Gj_tR2QzY4uE5D7qquGmofz%26amp%3Bsig%3DAOD64_1S_ASu1OzzLdXBqmRsoFrcg_l4DA%26amp%3Badurl%3Dhttp%3A//dc.jd.com/auto.php%253Fservice%253Dtransfer%2526type%253Dsem%2526from%253Dmedia%2526semid%253Dsemmedia%2526pl%253D0%2526ad%253D0%2526kid%253D4%2526klid%253D377012014%2526to%253Dhttp%3A//item.jd.com/1167845.html%26amp%3Bclient%3Dca-pub-4210569241504288%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_3_name%22%3E%E9%85%B7%E5%86%B7%E8%87%B3%E5%B0%8A(CoolerMaster)+V8GTS%E5%A4%9A%E5%B9%B3%E5%8F%B0CPU%E6%95%A3%E7%83%AD%E5%99%A8+(%E5%9D%87%E6%B8%A9%E6%9D%BF/8%E7%83%AD%E7%AE%A1/+140MM%E9%AB%98%E6%95%88%E9%9D%99%E9%9F%B3%E9%A3%8E%E6%89%87/%E7%AE%80%E6%98%93%E5%AE%89%E8%A3%9D)%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_3_description%22%3E%E9%85%B7%E5%86%B7%E8%87%B3%E5%B0%8A(CoolerMaster)+V8GTS%E5%A4%9A%E5%B9%B3%E5%8F%B0CPU%E6%95%A3%E7%83%AD%E5%99%A8+(%E5%9D%87%E6%B8%A9%E6%9D%BF/8%E7%83%AD%E7%AE%A1/+140MM%E9%AB%98%E6%95%88%E9%9D%99%E9%9F%B3%E9%A3%8E%E6%89%87/%E7%AE%80%E6%98%93%E5%AE%89%E8%A3%9D)%E3%80%82%C2%A5649.0%E5%85%A8%E6%96%B0,%E8%B6%85%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94,%E6%80%A7%E8%83%BD%E5%87%BA%E8%89%B2,%E6%97%B6%E5%B0%9A%E4%B9%8B%E9%80%89!%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_3_price%22%3E%EF%BF%A5%C2%A0649.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_3_regularPrice%22%3E%EF%BF%A5%C2%A0649.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_3_imageUrl%22%3Ehttp%3A//t0.gstatic.cn/shopping%3Fq%3Dtbn%3AANd9GcQppzHBbsoOqa3wj2QHuIqoBJaIfMYajncebahhVNH35ExfwXTaDwotN04doxg%26amp%3Busqp%3DCAI%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_3_url%22%3Ehttp%3A//www.googleadservices.com/pagead/aclk%3Fsa%3DL%26amp%3Bai%3DCua7eTUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQB-gUGCCUQARgDiAYBoAYZgAf6kq8D2AcA%26amp%3Bnum%3D1%26amp%3Bcid%3D5Gj_tR2QzY4uE5D7qquGmofz%26amp%3Bsig%3DAOD64_13bVB8T77rVa9cpNxmOvoUkAdwOA%26amp%3Badurl%3Dhttp%3A//dc.jd.com/auto.php%253Fservice%253Dtransfer%2526type%253Dsem%2526from%253Dmedia%2526semid%253Dsemmedia%2526pl%253D0%2526ad%253D0%2526kid%253D4%2526klid%253D377012014%2526to%253Dhttp%3A//item.jd.com/1058207.html%26amp%3Bclient%3Dca-pub-4210569241504288%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_4_name%22%3E%E7%AC%91%E8%96%87+XIAOWEI+%E6%97%B6%E5%B0%9A%E6%AC%A7%E7%BE%8E%E6%B3%A2%E5%A3%AB%E9%A1%BF%E5%8D%95%E8%82%A9%E6%96%9C%E8%B7%A8%E5%8C%85%E5%A5%B3%E5%8C%85%E5%AD%90%E6%AF%8D%E5%8C%85%E4%BA%94%E4%BB%B6%E5%A5%97%E5%A5%B3%E5%A3%AB%E6%89%8B%E6%8F%90%E5%8C%85%E5%8C%855725%E9%85%92%E7%BA%A2%E8%89%B2%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_4_description%22%3E%E7%AC%91%E8%96%87+XIAOWEI+%E6%97%B6%E5%B0%9A%E6%AC%A7%E7%BE%8E%E6%B3%A2%E5%A3%AB%E9%A1%BF%E5%8D%95%E8%82%A9%E6%96%9C%E8%B7%A8%E5%8C%85%E5%A5%B3%E5%8C%85%E5%AD%90%E6%AF%8D%E5%8C%85%E4%BA%94%E4%BB%B6%E5%A5%97%E5%A5%B3%E5%A3%AB%E6%89%8B%E6%8F%90%E5%8C%85%E5%8C%855725%E9%85%92%E7%BA%A2%E8%89%B2%E3%80%82%C2%A5109.0%E5%85%A8%E6%96%B0,1%E8%B6%85%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94,%E6%80%A7%E8%83%BD%E5%87%BA%E8%89%B2,%E6%97%B6%E5%B0%9A%E4%B9%8B%E9%80%89!%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_4_price%22%3E%EF%BF%A5%C2%A0109.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_4_regularPrice%22%3E%EF%BF%A5%C2%A0109.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_4_imageUrl%22%3Ehttp%3A//t1.gstatic.cn/shopping%3Fq%3Dtbn%3AANd9GcRJGhZBv73D6-ahu73DMUGq0I2MwISsaXXSrkLkb29_5iFMX3iA16Fo8ZoIfk8%26amp%3Busqp%3DCAI%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_4_url%22%3Ehttp%3A//www.googleadservices.com/pagead/aclk%3Fsa%3DL%26amp%3Bai%3DCTkvZTUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQB-gUGCCUQARgEiAYBoAYZgAf6kq8D2AcA%26amp%3Bnum%3D1%26amp%3Bcid%3D5Gj_tR2QzY4uE5D7qquGmofz%26amp%3Bsig%3DAOD64_0o9qH5HzKKbgUo5nfS5jTeI43MZw%26amp%3Badurl%3Dhttp%3A//dc.jd.com/auto.php%253Fservice%253Dtransfer%2526type%253Dsem%2526from%253Dmedia%2526semid%253Dsemmedia%2526pl%253D0%2526ad%253D0%2526kid%253D4%2526klid%253D377012014%2526to%253Dhttp%3A//item.jd.com/1278850.html%26amp%3Bclient%3Dca-pub-4210569241504288%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_5_name%22%3E%E9%9B%AA%E6%9B%BC(XUEMAN)%E6%B0%94%E8%B4%A8%E5%A5%B3%E5%8C%85+%E7%99%BE%E6%90%AD%E5%8D%95%E8%82%A9%E5%8C%85%E5%A5%B3%E5%A3%AB%E6%89%8B%E6%8F%90%E6%96%9C%E6%8C%8E%E5%8C%85+8300%E5%8D%87%E7%BA%A7%E7%89%88%E8%97%8F%E8%93%9D%E8%89%B2%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_5_description%22%3E%E9%9B%AA%E6%9B%BC(XUEMAN)%E6%B0%94%E8%B4%A8%E5%A5%B3%E5%8C%85+%E7%99%BE%E6%90%AD%E5%8D%95%E8%82%A9%E5%8C%85%E5%A5%B3%E5%A3%AB%E6%89%8B%E6%8F%90%E6%96%9C%E6%8C%8E%E5%8C%85+8300%E5%8D%87%E7%BA%A7%E7%89%88%E8%97%8F%E8%93%9D%E8%89%B2%E3%80%82%C2%A599.0%E5%85%A8%E6%96%B0,1%E8%B6%85%E9%AB%98%E6%80%A7%E4%BB%B7%E6%AF%94,%E6%80%A7%E8%83%BD%E5%87%BA%E8%89%B2,%E6%97%B6%E5%B0%9A%E4%B9%8B%E9%80%89!%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_5_price%22%3E%EF%BF%A5%C2%A099.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_5_regularPrice%22%3E%EF%BF%A5%C2%A099.00%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_5_imageUrl%22%3Ehttp%3A//t2.gstatic.cn/shopping%3Fq%3Dtbn%3AANd9GcT2f3t2-VcfOIQ2NuWDGSeti5bUj1PBIFfzjx7i_9evLfp-D40QOktwkCeedQ%26amp%3Busqp%3DCAI%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22Product_5_url%22%3Ehttp%3A//www.googleadservices.com/pagead/aclk%3Fsa%3DL%26amp%3Bai%3DC7pCATUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQB-gUGCCUQARgFiAYBoAYZgAf6kq8D2AcA%26amp%3Bnum%3D1%26amp%3Bcid%3D5Gj_tR2QzY4uE5D7qquGmofz%26amp%3Bsig%3DAOD64_0SWGF1clMOc55GEiAZ9w-Jnf97Jg%26amp%3Badurl%3Dhttp%3A//dc.jd.com/auto.php%253Fservice%253Dtransfer%2526type%253Dsem%2526from%253Dmedia%2526semid%253Dsemmedia%2526pl%253D0%2526ad%253D0%2526kid%253D4%2526klid%253D377012014%2526to%253Dhttp%3A//item.jd.com/1232690.html%26amp%3Bclient%3Dca-pub-4210569241504288%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22displayUrl%22%3Ewww.jd.com%3C/TEMPLATE_FIELD%3E%3CTEMPLATE_FIELD+field_name%3D%22destinationUrl%22%3Ehttp%3A//dc.jd.com/auto.php%3Fservice%3Dtransfer%26amp%3Btype%3Dsem%26amp%3Bfrom%3Dmedia%26amp%3Bsemid%3Dsemmedia%26amp%3Bpl%3D0%26amp%3Bad%3D0%26amp%3Bkid%3D4%26amp%3Bklid%3D377012014%26amp%3Bto%3Dhttp%3A//www.jd.com%3C/TEMPLATE_FIELD%3E%3C/TEMPLATE_ELEMENT%3E%3C/TEMPLATE_PARAMETERS%3E&amp;google_width=300&amp;google_height=250&amp;destination_url=http%3A//dc.jd.com/auto.php%3Fservice%3Dtransfer%26type%3Dsem%26from%3Dmedia%26semid%3Dsemmedia%26pl%3D0%26ad%3D0%26kid%3D4%26klid%3D377012014%26to%3Dhttp%3A//www.jd.com&amp;display_url=www.jd.com&amp;google_click_url=http://www.googleadservices.com/pagead/aclk%3Fsa%3DL%26ai%3DC7t-3TUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQBiAYBoAYZgAf6kq8D2AcA%26num%3D1%26cid%3D5Gj_tR2QzY4uE5D7qquGmofz%26sig%3DAOD64_0h31klaftqD-oJH3v1TSbNuFt_pA%26client%3Dca-pub-4210569241504288%26adurl%3D&amp;google_ait_url=http%3A//googleads.g.doubleclick.net/pagead/conversion/%3Fai%3DC7t-3TUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQBiAYBoAYZgAf6kq8D2AcA%26sigh%3D2GeMAVq-VTM%26label%3D_AITNAME_%26value%3D_AITVALUE_&amp;google_target_in_new_window=true&amp;flash_element_id=google_flash_obj&quot; TYPE=&quot;application/x-shockwave-flash&quot; AllowScriptAccess=&quot;always&quot; ></object></OBJECT></div></div><div style=&quot;position:relative;width:300px;height:250px;z-index:1000&quot;></div><!--[if IE]><script language=&quot;javascript&quot; src=&quot;http://pagead2.googlesyndication.com/pagead/inject_object_div.js&quot;> </script><![endif]--><style>div,ul,li{margin:0;padding:0;}#abgc{height:15px;position:absolute;right:0px;text-rendering:geometricPrecision;top:0;width:19px;z-index:9010;}#abgb{height:100%;}/*#abgc img{display:block;}#abgc svg{display:block;}*/#abgs{display:none;height:100%;}#abgl{text-decoration:none;}</style><div id=abgc><div id=abgb></div><div id=abgs><a id=abgl href=&quot;https://www.google.com/url?ct=abg&amp;amp;q=https://www.google.com/adsense/support/bin/request.py%3Fcontact%3Dabg_afc%26url%3Dhttp://www.cnblogs.com/LJ-fish/archive/2010/03/15/1686607.html%26gl%3DCN%26hl%3Den%26client%3Dca-pub-4210569241504288%26ai0%3DC7t-3TUn-VIPQI5T69QXb3oCQDb7WutwGjt7Z8qcB9orzjekBEAEgt7aWAmCdwd6B2AWgAe7s0PwDyAEEqQK9quBoRW2FPuACAKgDAaoE1gFP0N1Bm4fpI9n1e_nlfaDQXHLyUrRsWAkLUbGLiR829ipgdhRyRLqgmmudc7KzZzlZkBv1H37pKMQekn_ghOkQE1a-RVc2ThTz1YOKgDnTlAav7x2-uodahGWwCne0MVoqPgzVZ4Q4i4sSif5yPM7yCmQ_0KCAJ80FU_yWlN_-jwUKzCOF0D4we2tefpA6xmv_w82KFzwvD-a7Lf6y8qRqQGJwBKKyYFgMjmuMZJMfZWiodgxquKgbi25tFiyBBfuICLsjAepv8Wyl04evUAIaXK-UtJRw4AQBiAYBoAYZgAf6kq8D2AcA&amp;amp;usg=AFQjCNH2c-eX0IB9U2S1SuYXBaP0Kzen-g&quot; target=_blank></a></div></div><script src=&quot;http://static.googleadsserving.cn/pagead/js/r20150303/r20110914/abg.js&quot;></script><script>var abgp={el:document.getElementById('abgc'),ael:document.getElementById('abgs'),iel:document.getElementById('abgb'),hw:19,sw:77,hh:15,sh:15,himg:'http://static.googleadsserving.cn'+'/pagead/images/ad_choices_i.png',simg:'http://static.googleadsserving.cn/pagead/images/ad_choices_en.png',alt:'AdChoices',t:'AdChoices',tw:53,t2:'',t2w:0,tbo:0,att:'adchoices',ff:'img',halign:'right',fe:false,fnb:false,iba:false,uic:false,icd:undefined};window.abg &amp;&amp; new window.abg(abgp['el'],abgp['ael'],abgp['iel'],abgp['hw'],abgp['sw'],abgp['hh'],abgp['sh'],abgp['himg'],abgp['simg'],abgp['alt'],abgp['t'],abgp['tw'],abgp['t2'],abgp['t2w'],abgp['tbo'],abgp['att'],abgp['halign'],abgp['ff'],abgp['fe'],abgp['fnb'],abgp['iba'],abgp['uic'],abgp['icd']);</script><iframe frameborder=0 height=0 width=0 src=&quot;http://googleads.g.doubleclick.net/pagead/drt/s?v=r20120211&quot; style=&quot;position:absolute&quot;></iframe><script type=&quot;text/javascript&quot;>(function(){var h=this,aa=function(a){var b=typeof a;if(&quot;object&quot;==b)if(a){if(a instanceof Array)return&quot;array&quot;;if(a instanceof Object)return b;var c=Object.prototype.toString.call(a);if(&quot;[object Window]&quot;==c)return&quot;object&quot;;if(&quot;[object Array]&quot;==c||&quot;number&quot;==typeof a.length&amp;&amp;&quot;undefined&quot;!=typeof a.splice&amp;&amp;&quot;undefined&quot;!=typeof a.propertyIsEnumerable&amp;&amp;!a.propertyIsEnumerable(&quot;splice&quot;))return&quot;array&quot;;if(&quot;[object Function]&quot;==c||&quot;undefined&quot;!=typeof a.call&amp;&amp;&quot;undefined&quot;!=typeof a.propertyIsEnumerable&amp;&amp;!a.propertyIsEnumerable(&quot;call&quot;))return&quot;function&quot;}else return&quot;null&quot;;else if(&quot;function&quot;==b&amp;&amp;&quot;undefined&quot;==typeof a.call)return&quot;object&quot;;return b},l=function(a){return&quot;string&quot;==typeof a},ba=function(a,b){var c=Array.prototype.slice.call(arguments,1);return function(){var b=c.slice();b.push.apply(b,arguments);return a.apply(this,b)}},n=Date.now||function(){return+new Date},p=function(a,b){var c=a.split(&quot;.&quot;),d=h;c[0]in d||!d.execScript||d.execScript(&quot;var &quot;+c[0]);for(var e;c.length&amp;&amp;(e=c.shift());)c.length||void 0===b?d=d[e]?d[e]:d[e]={}:d[e]=b};var r=function(a,b,c,d,e){if(e)c=a+(&quot;&amp;&quot;+b+&quot;=&quot;+c);else{var f=&quot;&amp;&quot;+b+&quot;=&quot;,g=a.indexOf(f);0>g?c=a+f+c:(g+=f.length,f=a.indexOf(&quot;&amp;&quot;,g),c=0<=f?a.substring(0,g)+c+a.substring(f):a.substring(0,g)+c)}return 2E3<c.length?void 0!==d?r(a,b,d,void 0,e):a:c};var ca=function(){var a=/[&amp;\?]exk=([^&amp; ]+)/.exec(u.location.href);return a&amp;&amp;2==a.length?a[1]:null};var da=function(a,b,c,d){a.addEventListener?a.addEventListener(b,c,d||!1):a.attachEvent&amp;&amp;a.attachEvent(&quot;on&quot;+b,c)};var ea=function(a){var b=a.toString();a.name&amp;&amp;-1==b.indexOf(a.name)&amp;&amp;(b+=&quot;: &quot;+a.name);a.message&amp;&amp;-1==b.indexOf(a.message)&amp;&amp;(b+=&quot;: &quot;+a.message);if(a.stack){a=a.stack;var c=b;try{-1==a.indexOf(c)&amp;&amp;(a=c+&quot;\n&quot;+a);for(var d;a!=d;)d=a,a=a.replace(/((https?:\/..*\/)[^\/:]*:\d+(?:.|\n)*)\2/,&quot;$1&quot;);b=a.replace(/\n */g,&quot;\n&quot;)}catch(e){b=c}}return b},v=function(a,b,c){a.google_image_requests||(a.google_image_requests=[]);var d=a.document.createElement(&quot;img&quot;);if(c){var e=function(a){c(a);a=e;d.removeEventListener?d.removeEventListener(&quot;load&quot;,a,!1):d.detachEvent&amp;&amp;d.detachEvent(&quot;onload&quot;,a);a=e;d.removeEventListener?d.removeEventListener(&quot;error&quot;,a,!1):d.detachEvent&amp;&amp;d.detachEvent(&quot;onerror&quot;,a)};da(d,&quot;load&quot;,e);da(d,&quot;error&quot;,e)}d.src=b;a.google_image_requests.push(d)};var w=document,u=window;var fa=String.prototype.trim?function(a){return a.trim()}:function(a){return a.replace(/^[\s\xa0]+|[\s\xa0]+$/g,&quot;&quot;)},ga=function(a,b){return a<b?-1:a>b?1:0};var x=null,ha=function(a,b){for(var c in a)Object.prototype.hasOwnProperty.call(a,c)&amp;&amp;b.call(null,a[c],c,a)};function z(a){return&quot;function&quot;==typeof encodeURIComponent?encodeURIComponent(a):escape(a)}var ia=function(){if(!w.body)return!1;if(!x){var a=w.createElement(&quot;iframe&quot;);a.style.display=&quot;none&quot;;a.id=&quot;anonIframe&quot;;x=a;w.body.appendChild(a)}return!0},ja={};var ka=!0,la={},oa=function(a,b,c,d){var e=ma,f,g=ka;try{f=b()}catch(k){try{var t=ea(k);b=&quot;&quot;;k.fileName&amp;&amp;(b=k.fileName);var y=-1;k.lineNumber&amp;&amp;(y=k.lineNumber);g=e(a,t,b,y,c)}catch(q){try{var m=ea(q);a=&quot;&quot;;q.fileName&amp;&amp;(a=q.fileName);c=-1;q.lineNumber&amp;&amp;(c=q.lineNumber);ma(&quot;pAR&quot;,m,a,c,void 0,void 0)}catch(Aa){na({context:&quot;mRE&quot;,msg:Aa.toString()+&quot;\n&quot;+(Aa.stack||&quot;&quot;)},void 0)}}if(!g)throw k;}finally{if(d)try{d()}catch(qb){}}return f},ma=function(a,b,c,d,e,f){var g={};if(e)try{e(g)}catch(k){}g.context=a;g.msg=b.substring(0,512);c&amp;&amp;(g.file=c);0<d&amp;&amp;(g.line=d.toString());g.url=w.URL.substring(0,512);g.ref=w.referrer.substring(0,512);pa(g);na(g,f);return ka},na=function(a,b){try{if(Math.random()<(b||.01)){var c=&quot;/pagead/gen_204?id=jserror&quot;+qa(a),d=&quot;http&quot;+(&quot;http:&quot;==u.location.protocol?&quot;&quot;:&quot;s&quot;)+&quot;://pagead2.googlesyndication.com&quot;+c,d=d.substring(0,2E3);v(u,d,void 0)}}catch(e){}},pa=function(a){var b=a||{};ha(la,function(a,d){b[d]=u[a]})},A=function(a,b,c,d,e){return function(){var f=arguments;return oa(a,function(){return b.apply(c,f)},d,e)}},ra=function(a,b){return A(a,b,void 0,void 0,void 0)},qa=function(a){var b=&quot;&quot;;ha(a,function(a,d){if(0===a||a)b+=&quot;&amp;&quot;+d+&quot;=&quot;+z(a)});return b};var B=Array.prototype,sa=B.indexOf?function(a,b,c){return B.indexOf.call(a,b,c)}:function(a,b,c){c=null==c?0:0>c?Math.max(0,a.length+c):c;if(l(a))return l(b)&amp;&amp;1==b.length?a.indexOf(b,c):-1;for(;c<a.length;c++)if(c in a&amp;&amp;a[c]===b)return c;return-1},ta=B.map?function(a,b,c){return B.map.call(a,b,c)}:function(a,b,c){for(var d=a.length,e=Array(d),f=l(a)?a.split(&quot;&quot;):a,g=0;g<d;g++)g in f&amp;&amp;(e[g]=b.call(c,f[g],g,a));return e};var ua=function(a,b){for(var c in a)b.call(void 0,a[c],c,a)},C=function(a){var b=arguments.length;if(1==b&amp;&amp;&quot;array&quot;==aa(arguments[0]))return C.apply(null,arguments[0]);for(var c={},d=0;d<b;d++)c[arguments[d]]=!0;return c};var D;r:{var va=h.navigator;if(va){var wa=va.userAgent;if(wa){D=wa;break r}}D=&quot;&quot;};var E=function(){return-1!=D.indexOf(&quot;Edge&quot;)};var xa=-1!=D.indexOf(&quot;Opera&quot;)||-1!=D.indexOf(&quot;OPR&quot;),F=-1!=D.indexOf(&quot;Edge&quot;)||-1!=D.indexOf(&quot;Trident&quot;)||-1!=D.indexOf(&quot;MSIE&quot;),ya=-1!=D.indexOf(&quot;Gecko&quot;)&amp;&amp;!(-1!=D.toLowerCase().indexOf(&quot;webkit&quot;)&amp;&amp;!E())&amp;&amp;!(-1!=D.indexOf(&quot;Trident&quot;)||-1!=D.indexOf(&quot;MSIE&quot;))&amp;&amp;!E(),za=-1!=D.toLowerCase().indexOf(&quot;webkit&quot;)&amp;&amp;!E(),Ba=function(){var a=D;if(ya)return/rv\:([^\);]+)(\)|;)/.exec(a);if(F&amp;&amp;E())return/Edge\/([\d\.]+)/.exec(a);if(F)return/\b(?:MSIE|rv)[: ]([^\);]+)(\)|;)/.exec(a);if(za)return/WebKit\/(\S+)/.exec(a)},Ca=function(){var a=h.document;return a?a.documentMode:void 0},Da=function(){if(xa&amp;&amp;h.opera){var a=h.opera.version;return&quot;function&quot;==aa(a)?a():a}var a=&quot;&quot;,b=Ba();b&amp;&amp;(a=b?b[1]:&quot;&quot;);return F&amp;&amp;!E()&amp;&amp;(b=Ca(),b>parseFloat(a))?String(b):a}(),Ea={},Fa=function(a){if(!Ea[a]){for(var b=0,c=fa(String(Da)).split(&quot;.&quot;),d=fa(String(a)).split(&quot;.&quot;),e=Math.max(c.length,d.length),f=0;0==b&amp;&amp;f<e;f++){var g=c[f]||&quot;&quot;,k=d[f]||&quot;&quot;,t=RegExp(&quot;(\\d*)(\\D*)&quot;,&quot;g&quot;),y=RegExp(&quot;(\\d*)(\\D*)&quot;,&quot;g&quot;);do{var q=t.exec(g)||[&quot;&quot;,&quot;&quot;,&quot;&quot;],m=y.exec(k)||[&quot;&quot;,&quot;&quot;,&quot;&quot;];if(0==q[0].length&amp;&amp;0==m[0].length)break;b=ga(0==q[1].length?0:parseInt(q[1],10),0==m[1].length?0:parseInt(m[1],10))||ga(0==q[2].length,0==m[2].length)||ga(q[2],m[2])}while(0==b)}Ea[a]=0<=b}},Ga=h.document,Ha=Ca(),Ia=!Ga||!F||!Ha&amp;&amp;E()?void 0:Ha||(&quot;CSS1Compat&quot;==Ga.compatMode?parseInt(Da,10):5);var Ja={f:947190538,g:947190541,h:947190542,d:79463068,e:79463069},Ka={c:&quot;ud=1&quot;,i:&quot;ts=1&quot;};if(w&amp;&amp;w.URL)var La=w.URL,ka=!(La&amp;&amp;(0<La.indexOf(&quot;?google_debug&quot;)||0<La.indexOf(&quot;&amp;google_debug&quot;)));var G=function(a,b,c,d){da(a,b,A(d||&quot;osd_or_lidar::&quot;+b,c,void 0,void 0,void 0),void 0)},Ma=function(a){var b=0,c=function(){a();b++;10>b&amp;&amp;u.setTimeout(ra(&quot;osd_listener::ldcl_int&quot;,c),100)};c()};var Na=function(){try{u.localStorage.setItem(&quot;__sak&quot;,&quot;1&quot;);var a=u.localStorage.__sak;u.localStorage.removeItem(&quot;__sak&quot;);return&quot;1&quot;==a}catch(b){return!1}},Oa=function(a,b,c){a.google_image_requests||(a.google_image_requests=[]);var d=a.document.createElement(&quot;img&quot;);G(d,&quot;load&quot;,c,&quot;osd::ls_img::load&quot;);d.src=b;a.google_image_requests.push(d)};var H=function(a,b){this.b=a||0;this.a=b||&quot;&quot;},Pa=function(a,b){a.b&amp;&amp;(b[4]=a.b);a.a&amp;&amp;(b[12]=a.a)};H.prototype.match=function(a){return(this.b||this.a)&amp;&amp;(a.b||a.a)?this.a||a.a?this.a==a.a:this.b||a.b?this.b==a.b:!1:!1};H.prototype.toString=function(){var a=&quot;&quot;+this.b;this.a&amp;&amp;(a+=&quot;-&quot;+this.a);return a};var Qa=function(){var a=I,b=[];a.b&amp;&amp;b.push(&quot;adk=&quot;+a.b);a.a&amp;&amp;b.push(&quot;exk=&quot;+a.a);return b},Ra=function(a){var b=[];ua(a,function(a,d){var e=z(d),f=a;l(f)&amp;&amp;(f=z(f));b.push(e+&quot;=&quot;+f)});return b.join(&quot;\n&quot;)},J=0,Sa=0,Ta=function(a){var b=0,c=u;if(c&amp;&amp;c.Goog_AdSense_getAdAdapterInstance)return c;try{for(;c&amp;&amp;5>b;){if(c.google_osd_static_frame)return c;if(c.aswift_0&amp;&amp;(!a||c.aswift_0.google_osd_static_frame))return c.aswift_0;b++;c=c!=c.parent?c.parent:null}}catch(d){}return null},Ua=function(a,b,c,d){if(10<Sa)u.clearInterval(J);else if(++Sa,u.postMessage&amp;&amp;(b.b||b.a)){var e=Ta(!0);if(e){var f={};Pa(b,f);f[0]=&quot;goog_request_monitoring&quot;;f[6]=a;f[16]=c;d&amp;&amp;d.length&amp;&amp;(f[17]=d.join(&quot;,&quot;));try{var g=Ra(f);e.postMessage(g,&quot;*&quot;)}catch(k){}}}};C(&quot;area base br col command embed hr img input keygen link meta param source track wbr&quot;.split(&quot; &quot;));C(&quot;action&quot;,&quot;cite&quot;,&quot;data&quot;,&quot;formaction&quot;,&quot;href&quot;,&quot;manifest&quot;,&quot;poster&quot;,&quot;src&quot;);C(&quot;embed&quot;,&quot;iframe&quot;,&quot;link&quot;,&quot;object&quot;,&quot;script&quot;,&quot;style&quot;,&quot;template&quot;);var Va;if(!(Va=!ya&amp;&amp;!F)){var Wa;if(Wa=F)Wa=F&amp;&amp;(E()||9<=Ia);Va=Wa}Va||ya&amp;&amp;Fa(&quot;1.9.1&quot;);F&amp;&amp;Fa(&quot;9&quot;);var Xa,K=0,L=&quot;&quot;,M=!1,N=!1,O=!1,Ya=!0,Za=!1,$a=[],I=null,P=&quot;&quot;,ab=[],bb=[],cb=!1,Q=&quot;&quot;,R=&quot;&quot;,db=(new Date).getTime(),eb=[&quot;1&quot;,&quot;0&quot;,&quot;3&quot;],S=0,T=!1,U=!1,V=&quot;&quot;,fb=null,W=0,X=0,gb=0,hb=function(a,b,c){M&amp;&amp;(Ya||3!=(c||3))&amp;&amp;Y(a,b,!0);(O||N&amp;&amp;Za)&amp;&amp;Y(a,b)},ib=function(a,b){if(T){var c=V;try{a.localStorage[c]=b+&quot;&amp;timestamp=&quot;+n()+&quot;&amp;send&quot;}catch(d){}}},Y=function(a,b,c){if((b=b||P)&amp;&amp;!cb&amp;&amp;(2==X||c)){var d=jb(b,c);!c&amp;&amp;U?(U=!1,fb&amp;&amp;(a.clearInterval(fb),fb=null),ib(a,d),5!=S&amp;&amp;Oa(a,d,function(){a.localStorage.removeItem(V)})):c||!T||7!=S&amp;&amp;6!=S?v(a,d,void 0):(b=function(b){b&amp;&amp;&quot;error&quot;==b.type&amp;&amp;ib(a,d)},void 0===a.navigator.onLine||a.navigator.onLine?v(a,d,b):ib(a,d));c?M=!1:cb=!0}},jb=function(a,b){var c;c=b?&quot;osdim&quot;:O?&quot;osd2&quot;:&quot;osdtos&quot;;var d=[&quot;//pagead2.googlesyndication.com/activeview&quot;,&quot;?id=&quot;,c];&quot;osd2&quot;==c&amp;&amp;N&amp;&amp;Za&amp;&amp;d.push(&quot;&amp;ts=1&quot;);L&amp;&amp;d.push(&quot;&amp;avi=&quot;,L);Xa&amp;&amp;d.push(&quot;&amp;cid=&quot;,Xa);0!=S&amp;&amp;d.push(&quot;&amp;lsid=&quot;,S);U&amp;&amp;d.push(&quot;&amp;cwls=1&quot;);d.push(&quot;&amp;ti=1&quot;);d.push(&quot;&amp;&quot;,a);d.push(&quot;&amp;uc=&quot;+gb);c=d.join(&quot;&quot;);for(d=0;d<ab.length;d++){try{var e=ab[d]()}catch(f){}var g=&quot;max_length&quot;;2<=e.length&amp;&amp;(3==e.length&amp;&amp;(g=e[2]),c=r(c,z(e[0]),z(e[1]),g))}2E3<c.length&amp;&amp;(c=c.substring(0,2E3));return c},Z=function(a,b){if(Q){try{var c=r(Q,&quot;vi&quot;,a);ia()&amp;&amp;v(x.contentWindow,c,void 0)}catch(d){}0<=sa(eb,a)&amp;&amp;(Q=&quot;&quot;);var c=b||P,e;e=r(&quot;//pagead2.googlesyndication.com/pagead/gen_204?id=sldb&quot;,&quot;avi&quot;,L);e=r(e,&quot;vi&quot;,a);c&amp;&amp;(e+=&quot;&amp;&quot;+c);try{v(u,e,void 0)}catch(f){}}},kb=function(){Z(&quot;-1&quot;)},mb=function(a){if(a&amp;&amp;a.data&amp;&amp;l(a.data)){var b;var c=a.data;if(l(c)){b={};for(var c=c.split(&quot;\n&quot;),d=0;d<c.length;d++){var e=c[d].indexOf(&quot;=&quot;);if(!(0>=e)){var f=Number(c[d].substr(0,e)),e=c[d].substr(e+1);switch(f){case 5:case 8:case 11:case 15:case 16:e=&quot;true&quot;==e;break;case 4:case 7:case 6:case 14:e=Number(e);break;case 3:if(&quot;function&quot;==aa(decodeURIComponent))try{e=decodeURIComponent(e)}catch(g){throw Error(&quot;Error: URI malformed: &quot;+e);}break;case 17:e=ta(decodeURIComponent(e).split(&quot;,&quot;),Number)}b[f]=e}}b=b[0]?b:null}else b=null;if(b&amp;&amp;(c=new H(b[4],b[12]),I&amp;&amp;I.match(c))){for(c=0;c<bb.length;c++)bb[c](b);c=b[0];if(&quot;goog_acknowledge_monitoring&quot;==c)u.clearInterval(J),W=2;else if(&quot;goog_get_mode&quot;==c){W=1;d={};I&amp;&amp;Pa(I,d);d[0]=&quot;goog_provide_mode&quot;;d[6]=X;try{var k=Ra(d);a.source.postMessage(k,a.origin)}catch(t){}u.clearInterval(J);W=2}else if(&quot;goog_update_data&quot;==c){if(a=u,P=b[3],++gb,U){k=V;d=jb(P);try{a.localStorage[k]=lb(d)}catch(y){}}}else&quot;goog_image_request&quot;==c&amp;&amp;(hb(u,b[3]),b[5]||b[11]||Z(&quot;0&quot;,b[3]));if(&quot;goog_update_data&quot;==c||&quot;goog_image_request&quot;==c)(1==X||2==X||M)&amp;&amp;b[5]&amp;&amp;(a=1==b[15]&amp;&amp;&quot;goog_update_data&quot;==c,Za=!0,Z(&quot;1&quot;),R&amp;&amp;(k=R,ia()&amp;&amp;v(x.contentWindow,k,void 0),R=&quot;&quot;),M&amp;&amp;!a&amp;&amp;Y(u,void 0,!0),1==X?cb=!0:(2==S||4==S||5==S&amp;&amp;!U||7==S)&amp;&amp;Y(u)),(1==X||2==X||M)&amp;&amp;b[11]&amp;&amp;(N=!1,Z(&quot;3&quot;),M&amp;&amp;Y(u,void 0,!0),(2==S||4==S||5==S&amp;&amp;!U||7==S)&amp;&amp;Y(u))}}},nb=function(){hb(u);Z(&quot;0&quot;);if(2>W&amp;&amp;2==X){var a=u,b=&quot;//pagead2.googlesyndication.com/pagead/gen_204?id=osd2&amp;&quot;,c=[];c.push(&quot;ovr_value=&quot;+K);c.push(&quot;avi=&quot;+L);I&amp;&amp;(c=c.concat(Qa()));c.push(&quot;tt=&quot;+((new Date).getTime()-db));a.document&amp;&amp;a.document.referrer&amp;&amp;c.push(&quot;ref=&quot;+z(a.document.referrer));c.push(&quot;hs=&quot;+W);b+=c.join(&quot;&amp;&quot;);try{v(a,b,void 0)}catch(d){}}},lb=function(a){var b=a.match(/^(.*&amp;timestamp=)\d+$/);return b?b[1]+n():a+&quot;&amp;timestamp=&quot;+n()},ob=function(){var a={};Pa(I,a);a[0]=&quot;goog_dom_content_loaded&quot;;var b=Ra(a);Ma(function(){var a=Ta(!1),d=!a;!a&amp;&amp;u&amp;&amp;(a=u.parent);if(a&amp;&amp;a.postMessage)try{a.postMessage(b,&quot;*&quot;),d&amp;&amp;u.postMessage(b,&quot;*&quot;)}catch(e){}})},pb=function(a){if(l(a)){a=a.split(&quot;&amp;&quot;);for(var b=0;b<a.length;b++)a[b]==Ka.c&amp;&amp;(Ya=!1)}};p(&quot;osdlfm&quot;,A(&quot;osd_listener::init&quot;,function(a,b,c,d,e,f,g,k,t,y,q){K=a;Q=b;R=d;M=f;S=y||0;Xa=q;k&amp;&amp;pb(k);N=g&amp;&amp;f;1!=t&amp;&amp;2!=t&amp;&amp;3!=t||$a.push(Ja[&quot;MRC_TEST_&quot;+t]);I=new H(e,ca());G(u,&quot;load&quot;,kb,&quot;osd_listener::load&quot;);G(u,&quot;message&quot;,mb,&quot;osd_listener::message&quot;);L=c||&quot;&quot;;G(u,&quot;unload&quot;,nb,&quot;osd_listener::unload&quot;);var m=u.document;!m.readyState||&quot;complete&quot;!=m.readyState&amp;&amp;&quot;loaded&quot;!=m.readyState?(&quot;msie&quot;in ja?ja.msie:ja.msie=-1!=navigator.userAgent.toLowerCase().indexOf(&quot;msie&quot;))&amp;&amp;!window.opera?G(m,&quot;readystatechange&quot;,function(){&quot;complete&quot;!=m.readyState&amp;&amp;&quot;loaded&quot;!=m.readyState||ob()},&quot;osd_listener::rsc&quot;):G(m,&quot;DOMContentLoaded&quot;,ob,&quot;osd_listener::dcl&quot;):ob();-1==K?X=f?3:1:-2==K?X=3:0<K&amp;&amp;(X=2,O=!0);N&amp;&amp;!O&amp;&amp;(X=2);(T=!!u.location.hostname.match(/doubleclick\.net/)&amp;&amp;Na()&amp;&amp;1E3>u.localStorage.length)&amp;&amp;(V=&quot;LSPNGS-&quot;+I.toString()+&quot;-&quot;+(&quot;&quot;+Math.random()).split(&quot;.&quot;)[1]+n());2!=X||!T||3!=S&amp;&amp;4!=S&amp;&amp;5!=S||(U=!0,fb=u.setInterval(ra(&quot;osd_listener::ls_int&quot;,function(){var a=u,b=V,c=a.localStorage[b];if(c)try{a.localStorage[b]=lb(c)}catch(d){}}),1E3));I&amp;&amp;(I.b||I.a)&amp;&amp;(W=1,J=u.setInterval(ra(&quot;osd_proto::reqm_int&quot;,ba(Ua,X,I,N,$a)),500))}));p(&quot;osdlac&quot;,A(&quot;osd_listener::lac_ex&quot;,function(a){ab.push(a)}));p(&quot;osdlamrc&quot;,A(&quot;osd_listener::lamrc_ex&quot;,function(a){bb.push(a)}));p(&quot;osdsir&quot;,A(&quot;osd_listener::sir_ex&quot;,hb));})();osdlfm(-1,'','BYfbfTUn-VIPQI5T69QXb3oCQDQCO3tnypwEAABABOAHIAQTgAgDgBAGgBhnCEwMQgAE','',1707953772,true,false,'',0,0,'');</script></body></html>&#10;{&quot;uid&quot;:1,&quot;hostPeerName&quot;:&quot;http://www.cnblogs.com&quot;,&quot;initialGeometry&quot;:&quot;{\&quot;windowCoords_t\&quot;:60,\&quot;windowCoords_r\&quot;:1905,\&quot;windowCoords_b\&quot;:904,\&quot;windowCoords_l\&quot;:-2,\&quot;frameCoords_t\&quot;:4012,\&quot;frameCoords_r\&quot;:408,\&quot;frameCoords_b\&quot;:4262,\&quot;frameCoords_l\&quot;:108,\&quot;styleZIndex\&quot;:\&quot;auto\&quot;,\&quot;allowedExpansion_t\&quot;:0,\&quot;allowedExpansion_r\&quot;:0,\&quot;allowedExpansion_b\&quot;:0,\&quot;allowedExpansion_l\&quot;:0,\&quot;xInView\&quot;:0,\&quot;yInView\&quot;:0}&quot;,&quot;permissions&quot;:&quot;{\&quot;expandByOverlay\&quot;:true,\&quot;expandByPush\&quot;:false,\&quot;readCookie\&quot;:false,\&quot;writeCookie\&quot;:false}&quot;,&quot;metadata&quot;:&quot;{\&quot;shared\&quot;:{\&quot;sf_ver\&quot;:\&quot;1-0-2\&quot;,\&quot;ck_on\&quot;:1,\&quot;flash_ver\&quot;:\&quot;16.0.0\&quot;}}&quot;,&quot;reportCreativeGeometry&quot;:false}" 
+marginWidth=0 scrolling=no 
+data-is-safeframe="true"></IFRAME></DIV></DIV></DIV></DIV>
+<DIV id=under_post_news>
+<DIV class="itnews c_ad_block"><B>最新IT新闻</B>:<BR>· <A 
+href="http://news.cnblogs.com/n/516505/" target=_blank>Apple 
+Watch大卖理由：它的“前辈”几乎没输过</A><BR>· <A href="http://news.cnblogs.com/n/516504/" 
+target=_blank>苹果发布Apple Watch/Macbook 中国首批开卖</A><BR>· <A 
+href="http://news.cnblogs.com/n/516503/" target=_blank>李开复和徐小平看重毛大庆什么？</A><BR>· 
+<A href="http://news.cnblogs.com/n/516502/" target=_blank>去年移动互联网投资交易额创纪录 
+达1200亿美元</A><BR>· <A href="http://news.cnblogs.com/n/516501/" 
+target=_blank>看刚果如何解决交通问题：启用机器人交警</A><BR>» <A title=IT新闻 
+href="http://news.cnblogs.com/" target=_blank>更多新闻...</A></DIV></DIV>
+<DIV id=google_ad_c2 class=c_ad_block>
+<DIV style="WIDTH: 468px; HEIGHT: 60px" id=div-gpt-ad-1410860226396-0>
+<SCRIPT type=text/javascript>
+try {
+    if (enableGoogleAd) {
+        googletag.cmd.push(function () { googletag.display('div-gpt-ad-1410860226396-0'); });
+    } else {
+        $('#div-gpt-ad-1346480159711-0').hide();
+    }
+} catch (e) { }
+</SCRIPT>
+
+<DIV 
+style="BORDER-BOTTOM: 0pt; BORDER-LEFT: 0pt; BORDER-TOP: 0pt; BORDER-RIGHT: 0pt" 
+id=google_ads_iframe_/1090369/cnblogs_blogpost_C2_0__container__ 
+name="google_ads_iframe_/1090369/cnblogs_blogpost_C2_0__container__"><IFRAME 
+style="BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; VERTICAL-ALIGN: bottom; BORDER-TOP: 0px; BORDER-RIGHT: 0px" 
+id=google_ads_iframe_/1090369/cnblogs_blogpost_C2_0 height=60 marginHeight=0 
+src="javascript:&quot;<html><body style='background:transparent'></body></html>&quot;" 
+frameBorder=0 width=468 allowTransparency 
+name=google_ads_iframe_/1090369/cnblogs_blogpost_C2_0 marginWidth=0 
+scrolling=no></IFRAME></DIV></DIV></DIV>
+<DIV id=under_post_kb>
+<DIV id=kb_block class="itnews c_ad_block"><B>最新知识库文章</B>:<BR>
+<DIV id=kb_recent>· <A href="http://kb.cnblogs.com/page/516256/" 
+target=_blank>图片服务架构演进</A><BR>· <A href="http://kb.cnblogs.com/page/516179/" 
+target=_blank>软件架构师是一个角色，不是一项工作</A><BR>· <A 
+href="http://kb.cnblogs.com/page/516244/" target=_blank>给公司部门设计的SOA架构</A><BR>· 
+<A href="http://kb.cnblogs.com/page/516088/" target=_blank>好代码不值钱</A><BR>· <A 
+href="http://kb.cnblogs.com/page/516050/" target=_blank>关于响应式布局</A><BR></DIV>» 
+<A href="http://kb.cnblogs.com/" target=_blank>更多知识库文章...</A></DIV></DIV>
+<DIV id=HistoryToday class=c_ad_block></DIV>
+<SCRIPT type=text/javascript>
+$(function () {
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 200);
+});
+</SCRIPT>
+</DIV></DIV><!--end: forFlow --></DIV><!--end: mainContent 主体内容容器-->
+<DIV id=sideBar>
+<DIV id=sideBarMain><!--done-->
+<DIV class=newsItem>
+<H3 class=catListTitle>公告</H3>
+<DIV id=blog-news>人生苦短，我用python<BR>豆瓣: http://www.douban.com/people/kittylj/ 
+<BR>lijun.zh0 at gmail <BR><EMBED height=500 type=application/x-shockwave-flash 
+align=L width=230 
+src=http://tjs.sjs.sinajs.cn/t3/miniblog/static/swf/miniblogwidget.swf 
+allowScriptAccess="sameDomain" 
+flashvars="width=230&amp;height=500&amp;uid=1749043283&amp;skin=skin3" 
+scale="noborder" quality="high" wmode="transparent"></EMBED> 
+<DIV id=profile_block>昵称：<A 
+href="http://home.cnblogs.com/u/LJ-fish/">酷酷的小鱼儿</A><BR>园龄：<A 
+title=入园时间：2010-03-02 href="http://home.cnblogs.com/u/LJ-fish/">5年</A><BR>粉丝：<A 
+href="http://home.cnblogs.com/u/LJ-fish/followers/">6</A><BR>关注：<A 
+href="http://home.cnblogs.com/u/LJ-fish/followees/">0</A>
+<DIV id=p_b_follow><A 
+onclick="cnblogs.UserManager.FollowBlogger('94fac0cb-bf25-df11-ba8f-001cf0cd104b')" 
+href="javascript:void(0);">+加关注</A></DIV></DIV></DIV>
+<SCRIPT type=text/javascript>loadBlogNews();</SCRIPT>
+</DIV>
+<DIV id=calendar>
+<DIV id=blog-calendar>
+<TABLE id=blogCalendar class=Cal title=日历 cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD colSpan=7>
+      <TABLE class=CalTitle cellSpacing=0>
+        <TBODY>
+        <TR>
+          <TD class=CalNextPrev><A 
+            onclick="loadBlogCalendar('2010/02/01');return false;" 
+            href="javascript:void(0);">&lt;</A></TD>
+          <TD align=middle>2010年3月</TD>
+          <TD class=CalNextPrev align=right><A 
+            onclick="loadBlogCalendar('2010/04/01');return false;" 
+            href="javascript:void(0);">&gt;</A></TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TH class=CalDayHeader abbr=日 scope=col align=middle>日</TH>
+    <TH class=CalDayHeader abbr=一 scope=col align=middle>一</TH>
+    <TH class=CalDayHeader abbr=二 scope=col align=middle>二</TH>
+    <TH class=CalDayHeader abbr=三 scope=col align=middle>三</TH>
+    <TH class=CalDayHeader abbr=四 scope=col align=middle>四</TH>
+    <TH class=CalDayHeader abbr=五 scope=col align=middle>五</TH>
+    <TH class=CalDayHeader abbr=六 scope=col align=middle>六</TH></TR>
+  <TR>
+    <TD class=CalOtherMonthDay align=middle>28</TD>
+    <TD align=middle>1</TD>
+    <TD align=middle><A 
+      href="http://www.cnblogs.com/LJ-fish/archive/2010/03/02.html"><U>2</U></A></TD>
+    <TD align=middle>3</TD>
+    <TD align=middle>4</TD>
+    <TD align=middle>5</TD>
+    <TD class=CalWeekendDay align=middle>6</TD></TR>
+  <TR>
+    <TD class=CalWeekendDay align=middle>7</TD>
+    <TD align=middle><A 
+      href="http://www.cnblogs.com/LJ-fish/archive/2010/03/08.html"><U>8</U></A></TD>
+    <TD align=middle>9</TD>
+    <TD align=middle>10</TD>
+    <TD align=middle>11</TD>
+    <TD align=middle>12</TD>
+    <TD class=CalWeekendDay align=middle>13</TD></TR>
+  <TR>
+    <TD class=CalWeekendDay align=middle>14</TD>
+    <TD align=middle><A 
+      href="http://www.cnblogs.com/LJ-fish/archive/2010/03/15.html"><U>15</U></A></TD>
+    <TD align=middle>16</TD>
+    <TD align=middle>17</TD>
+    <TD align=middle>18</TD>
+    <TD align=middle>19</TD>
+    <TD class=CalWeekendDay align=middle>20</TD></TR>
+  <TR>
+    <TD class=CalWeekendDay align=middle>21</TD>
+    <TD align=middle>22</TD>
+    <TD align=middle>23</TD>
+    <TD align=middle>24</TD>
+    <TD align=middle>25</TD>
+    <TD align=middle>26</TD>
+    <TD class=CalWeekendDay align=middle><A 
+      href="http://www.cnblogs.com/LJ-fish/archive/2010/03/27.html"><U>27</U></A></TD></TR>
+  <TR>
+    <TD class=CalWeekendDay align=middle>28</TD>
+    <TD align=middle>29</TD>
+    <TD align=middle>30</TD>
+    <TD align=middle>31</TD>
+    <TD class=CalOtherMonthDay align=middle>1</TD>
+    <TD class=CalOtherMonthDay align=middle>2</TD>
+    <TD class=CalOtherMonthDay align=middle>3</TD></TR>
+  <TR>
+    <TD class=CalOtherMonthDay align=middle>4</TD>
+    <TD class=CalOtherMonthDay align=middle>5</TD>
+    <TD class=CalOtherMonthDay align=middle>6</TD>
+    <TD class=CalOtherMonthDay align=middle>7</TD>
+    <TD class=CalOtherMonthDay align=middle>8</TD>
+    <TD class=CalOtherMonthDay align=middle>9</TD>
+    <TD class=CalOtherMonthDay align=middle>10</TD></TR></TBODY></TABLE></DIV>
+<SCRIPT type=text/javascript>loadBlogDefaultCalendar();</SCRIPT>
+</DIV>
+<DIV id=leftcontentcontainer>
+<DIV id=blog-sidecolumn>
+<DIV class=mySearch>
+<H3 class=catListTitle>搜索</H3>
+<DIV id=widget_my_zzk class=div_my_zzk><INPUT 
+onkeydown="return zzk_go_enter(event);" id=q class=input_my_zzk type=text>&nbsp;<INPUT id=btnZzk class=btn_my_zzk onclick=zzk_go() value=找找看 type=button></DIV>
+<DIV id=widget_my_google class=div_my_zzk><INPUT 
+onkeydown="return google_go_enter(event)" id=google_q class=input_my_zzk 
+type=text name=google_q>&nbsp;<INPUT class=btn_my_zzk onclick=google_go() value=谷歌搜索 type=button></DIV></DIV>
+<DIV class=catListLink>
+<H3 class=catListTitle>常用链接</H3>
+<UL>
+  <LI><A title=我的博客的随笔列表 href="http://www.cnblogs.com/LJ-fish/p/">我的随笔</A></LI>
+  <LI><A title=我发表过的评论列表 
+  href="http://www.cnblogs.com/LJ-fish/MyComments.html">我的评论</A></LI>
+  <LI><A title=我评论过的随笔列表 
+  href="http://www.cnblogs.com/LJ-fish/OtherPosts.html">我的参与</A></LI>
+  <LI><A title=我的博客的评论列表 
+  href="http://www.cnblogs.com/LJ-fish/RecentComments.html">最新评论</A></LI>
+  <LI><A title=我的博客的标签列表 
+href="http://www.cnblogs.com/LJ-fish/tag/">我的标签</A></LI>
+  <LI><A id=itemListLink 
+  onclick="this.blur();WarpClass('itemListLink', 'itemListLin_con');return false;" 
+  href="#">更多链接</A></LI></UL>
+<DIV style="DISPLAY: none" id=itemListLin_con>
+<UL></UL></DIV></DIV>
+<DIV class=catListTag>
+<H3 class=catListTitle>我的标签</H3>
+<UL>
+  <LI><A href="http://www.cnblogs.com/LJ-fish/tag/cocoa/">cocoa</A>(1)</LI>
+  <LI><A href="http://www.cnblogs.com/LJ-fish/tag/ipad/">ipad</A>(1)</LI>
+  <LI><A href="http://www.cnblogs.com/LJ-fish/tag/iphone/">iphone</A>(1)</LI>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/tag/%E8%8B%B9%E6%9E%9C/">苹果</A>(1)</LI></UL></DIV>
+<DIV class=catListPostCategory>
+<H3 class=catListTitle>随笔分类</H3>
+<UL>
+  <LI><A id=CatList_LinkList_0_Link_0 
+  href="http://www.cnblogs.com/LJ-fish/category/237413.html">C/C++(1)</A> </LI>
+  <LI><A id=CatList_LinkList_0_Link_1 
+  href="http://www.cnblogs.com/LJ-fish/category/275307.html">ipone/ipad/object-c/cocoa(1)</A> 
+  </LI>
+  <LI><A id=CatList_LinkList_0_Link_2 
+  href="http://www.cnblogs.com/LJ-fish/category/237414.html">java</A> </LI>
+  <LI><A id=CatList_LinkList_0_Link_3 
+  href="http://www.cnblogs.com/LJ-fish/category/237415.html">Linux(4)</A> </LI>
+  <LI><A id=CatList_LinkList_0_Link_4 
+  href="http://www.cnblogs.com/LJ-fish/category/235629.html">others(3)</A> </LI>
+  <LI><A id=CatList_LinkList_0_Link_5 
+  href="http://www.cnblogs.com/LJ-fish/category/256931.html">Python(3)</A> </LI>
+  <LI><A id=CatList_LinkList_0_Link_6 
+  href="http://www.cnblogs.com/LJ-fish/category/237416.html">服务器相关(3)</A> </LI>
+  <LI><A id=CatList_LinkList_0_Link_7 
+  href="http://www.cnblogs.com/LJ-fish/category/235620.html">工作总结(6)</A> </LI>
+  <LI><A id=CatList_LinkList_0_Link_8 
+  href="http://www.cnblogs.com/LJ-fish/category/235622.html">人生、思考</A> </LI>
+  <LI><A id=CatList_LinkList_0_Link_9 
+  href="http://www.cnblogs.com/LJ-fish/category/235621.html">生活情趣</A> </LI>
+  <LI><A id=CatList_LinkList_0_Link_10 
+  href="http://www.cnblogs.com/LJ-fish/category/265301.html">数据库(1)</A> 
+</LI></UL></DIV>
+<DIV class=catListPostArchive>
+<H3 class=catListTitle>随笔档案</H3>
+<UL>
+  <LI><A id=CatList_LinkList_1_Link_0 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/12.html">2010年12月 (1)</A> 
+  </LI>
+  <LI><A id=CatList_LinkList_1_Link_1 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/11.html">2010年11月 (1)</A> 
+  </LI>
+  <LI><A id=CatList_LinkList_1_Link_2 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/10.html">2010年10月 (4)</A> 
+  </LI>
+  <LI><A id=CatList_LinkList_1_Link_3 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/09.html">2010年9月 (1)</A> 
+  </LI>
+  <LI><A id=CatList_LinkList_1_Link_4 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/08.html">2010年8月 (2)</A> 
+  </LI>
+  <LI><A id=CatList_LinkList_1_Link_5 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/05.html">2010年5月 (2)</A> 
+  </LI>
+  <LI><A id=CatList_LinkList_1_Link_6 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/04.html">2010年4月 (2)</A> 
+  </LI>
+  <LI><A id=CatList_LinkList_1_Link_7 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/03.html">2010年3月 (4)</A> 
+  </LI></UL></DIV>
+<DIV style="DISPLAY: none" id=recent_comments_wrap 
+jQuery1705313137303083111="2">
+<DIV class=catListComment>
+<H3 class=catListTitle>最新评论</H3>
+<DIV id=RecentCommentsBlock></DIV></DIV></DIV>
+<DIV id=topview_posts_wrap>
+<DIV class=catListView>
+<H3 class=catListTitle>阅读排行榜</H3>
+<DIV id=TopViewPostsBlock>
+<UL>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/03/15/1686607.html">1. 
+  linux下使用lftp的小结(38837)</A></LI>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/08/09/1796078.html">2. 
+  python发送HTTP请求(9054)</A></LI>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/04/04/1704118.html">3. 
+  在Win7下硬盘安装ubuntu9.10方法小结(3839)</A></LI>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/05/17/1737674.html">4. 
+  [转]linux与ubuntu的网络配置文件(3554)</A></LI>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/03/27/1698580.html">5. 
+  最简单的HTTP服务器实现，学习笔记(2642)</A></LI></UL></DIV></DIV></DIV>
+<DIV id=topfeedback_posts_wrap>
+<DIV class=catListFeedback>
+<H3 class=catListTitle>评论排行榜</H3>
+<DIV id=TopFeedbackPostsBlock>
+<UL>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/03/27/1698580.html">1. 
+  最简单的HTTP服务器实现，学习笔记(4)</A></LI>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/05/10/1732120.html">2. 
+  dropbox被和谐，无奈，纪念下(3)</A></LI>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/11/09/1872864.html">3. 
+  linux下apache + php + mysql + phpMyAdmin (mod_php)安装配置方法整理(2)</A></LI>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/04/04/1704118.html">4. 
+  在Win7下硬盘安装ubuntu9.10方法小结(2)</A></LI></UL></DIV></DIV></DIV>
+<DIV id=topdigg_posts_wrap>
+<DIV class=catListView>
+<H3 class=catListTitle>推荐排行榜</H3>
+<DIV id=TopDiggPostsBlock>
+<UL>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/03/27/1698580.html">1. 
+  最简单的HTTP服务器实现，学习笔记(2)</A></LI>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/10/14/1851592.html">2. mysql 
+  存储过程 动态参数 查询执行结果(2)</A></LI>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/10/26/1861897.html">3. 
+  PYTHON 调用动态库 dll lib.so 使用 ctypes(1)</A></LI>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/10/28/1863707.html">4. 
+  如何删除gmail快捷链接？(1)</A></LI>
+  <LI><A 
+  href="http://www.cnblogs.com/LJ-fish/archive/2010/11/09/1872864.html">5. 
+  linux下apache + php + mysql + phpMyAdmin 
+(mod_php)安装配置方法整理(1)</A></LI></UL></DIV></DIV></DIV></DIV>
+<SCRIPT type=text/javascript>loadBlogSideColumn();</SCRIPT>
+<IFRAME style="DISPLAY: none; VISIBILITY: hidden" 
+src="http://tpc.googlesyndication.com/safeframe/1-0-2/html/container.html"></IFRAME></DIV></DIV><!--end: sideBarMain --></DIV><!--end: sideBar 侧边栏容器 -->
+<DIV class=clear></DIV></DIV><!--end: main -->
+<DIV class=clear></DIV>
+<DIV id=footer><!--done-->Copyright ©2015 酷酷的小鱼儿 </DIV><!--end: footer --></DIV><!--end: home 自定义的最大容器 --><IFRAME 
+style="WIDTH: 0px; DISPLAY: none; HEIGHT: 0px" 
+id=google_osd_static_frame_6066433832363 
+name=google_osd_static_frame></IFRAME></BODY></HTML>

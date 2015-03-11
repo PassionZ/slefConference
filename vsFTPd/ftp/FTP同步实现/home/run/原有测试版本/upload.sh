@@ -1,11 +1,12 @@
 #!/bin/bash
-HOST="192.168.0.128"
+HOST=`cat /home/PCNOW-HOST`
+echo "$HOST "
 USER="root"
-PASS="54007"
+PASS="123456"
 #LCD="/home/dir/web/UpLoadFloder"
 
-LCD="/home/UpLoadFloder/"
-RCD="/var/ftp/UpLoadFloder/"
+LCD="/home/uploads/"
+RCD="/var/ftp/uploads/"
 lftp -c "set ftp:list-options -a;
 open ftp://$USER:$PASS@$HOST;
 lcd $LCD;
