@@ -33,6 +33,57 @@
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Resource\Com\ClientFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Com\IRSClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Com\IRSTCPLogicClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\Com\Config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgPMosaicScreenADScreen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\UIBase\FlatButton.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TempletArithmetic\16x9TempletNormal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TempletArithmetic\TempletAALang.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TempletArithmetic\TempletArithmetic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TempletArithmetic\TempletArithmeticFactory.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TempletArithmetic\TempletFree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TempletArithmetic\TempletNormal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConferenceWinDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\UtilBase\VideoDropTarget.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawingObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="court.cpp">
@@ -42,6 +93,51 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Com\ClientFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Com\IRSTCPLogicClient.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\Com\Config.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMosaicScreenPADScreen.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\UIBase\FlatButton.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TempletArithmetic\16x9TempletNormal.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TempletArithmetic\TempletAALang.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TempletArithmetic\TempletArithmeticFactory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TempletArithmetic\TempletFree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TempletArithmetic\TempletNormal.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConferenceWinDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UserDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\UtilBase\VideoDropTarget.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawingObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

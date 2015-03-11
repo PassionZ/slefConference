@@ -44,6 +44,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>../../bin/debug</OutDir>
+    <IntDir>../../obj/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -53,7 +54,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
@@ -106,19 +107,51 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseDlg.h" />
+    <ClInclude Include="ConferenceWinDlg.h" />
     <ClInclude Include="court.h" />
     <ClInclude Include="courtDlg.h" />
+    <ClInclude Include="DlgPMosaicScreenADScreen.h" />
+    <ClInclude Include="DrawingObject.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Resource\Com\ClientFactory.h" />
+    <ClInclude Include="Resource\Com\Config.h" />
+    <ClInclude Include="Resource\Com\IRSClient.h" />
+    <ClInclude Include="Resource\Com\IRSTCPLogicClient.h" />
+    <ClInclude Include="Resource\UIBase\FlatButton.h" />
+    <ClInclude Include="Resource\UtilBase\VideoDropTarget.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TempletArithmetic\16x9TempletNormal.h" />
+    <ClInclude Include="TempletArithmetic\TempletAALang.h" />
+    <ClInclude Include="TempletArithmetic\TempletArithmetic.h" />
+    <ClInclude Include="TempletArithmetic\TempletArithmeticFactory.h" />
+    <ClInclude Include="TempletArithmetic\TempletFree.h" />
+    <ClInclude Include="TempletArithmetic\TempletNormal.h" />
+    <ClInclude Include="UserDlg.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseDlg.cpp" />
+    <ClCompile Include="ConferenceWinDlg.cpp" />
     <ClCompile Include="court.cpp" />
     <ClCompile Include="courtDlg.cpp" />
+    <ClCompile Include="DlgMosaicScreenPADScreen.cpp" />
+    <ClCompile Include="DrawingObject.cpp" />
+    <ClCompile Include="Resource\Com\ClientFactory.cpp" />
+    <ClCompile Include="Resource\Com\Config.cpp" />
+    <ClCompile Include="Resource\Com\IRSTCPLogicClient.cpp" />
+    <ClCompile Include="Resource\UIBase\FlatButton.cpp" />
+    <ClCompile Include="Resource\UtilBase\VideoDropTarget.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TempletArithmetic\16x9TempletNormal.cpp" />
+    <ClCompile Include="TempletArithmetic\TempletAALang.cpp" />
+    <ClCompile Include="TempletArithmetic\TempletArithmeticFactory.cpp" />
+    <ClCompile Include="TempletArithmetic\TempletFree.cpp" />
+    <ClCompile Include="TempletArithmetic\TempletNormal.cpp" />
+    <ClCompile Include="UserDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="court.rc" />
@@ -132,4 +165,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="court.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
